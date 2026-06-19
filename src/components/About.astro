@@ -1,0 +1,221 @@
+---
+---
+
+<section class="about section--surface" id="contato" aria-labelledby="about-title">
+  <div class="about__container">
+
+    <div class="about__header">
+      <p class="eyebrow reveal">Sobre o ABS</p>
+      <h2 class="section-title reveal delay-1" id="about-title">Feito pra Cáceres.</h2>
+      <p class="about__text reveal delay-2">
+        O Vai de ABS é operado por gente daqui, com licença exclusiva pra rodar moto na cidade.
+        Criado pra resolver um problema que cacerense vive todo dia: pedir uma moto sem depender só de sorte.
+      </p>
+    </div>
+
+    <div class="about__contact" aria-label="Contatos">
+      <a
+        href="https://wa.me/55XXXXXXXXXXX"
+        class="contact-card reveal delay-2"
+        target="_blank"
+        rel="noopener noreferrer"
+        id="contact-whatsapp"
+        aria-label="Fale com a gente no WhatsApp"
+      >
+        <div class="contact-card__icon" aria-hidden="true">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"/>
+          </svg>
+        </div>
+        <div class="contact-card__body">
+          <p class="contact-card__platform">WhatsApp</p>
+          <p class="contact-card__handle">(XX) XXXXX-XXXX</p>
+        </div>
+        <svg class="contact-card__arrow" width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true">
+          <path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+      </a>
+
+      <a
+        href="https://instagram.com/abscaceres"
+        class="contact-card reveal delay-3"
+        target="_blank"
+        rel="noopener noreferrer"
+        id="contact-instagram"
+        aria-label="Siga a gente no Instagram"
+      >
+        <div class="contact-card__icon" aria-hidden="true">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <rect x="2" y="2" width="20" height="20" rx="5" ry="5"/>
+            <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/>
+            <line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/>
+          </svg>
+        </div>
+        <div class="contact-card__body">
+          <p class="contact-card__platform">Instagram</p>
+          <p class="contact-card__handle">@abscaceres</p>
+        </div>
+        <svg class="contact-card__arrow" width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true">
+          <path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+      </a>
+    </div>
+
+    <div class="about__hashtags reveal delay-4" aria-label="Hashtags da marca">
+      <span class="about__hashtag">#VaiDeABS</span>
+      <span class="about__hashtag">#ABSCaceres</span>
+    </div>
+
+  </div>
+</section>
+
+<style>
+  .about {
+    padding: var(--section-pad-y) var(--section-pad-x);
+    position: relative;
+  }
+
+  .about__container {
+    max-width: var(--container-max);
+    margin: 0 auto;
+    position: relative;
+    z-index: 2;
+  }
+
+  .about__header {
+    margin-bottom: 3rem;
+  }
+
+  .about__header .section-title {
+    margin-bottom: 1.25rem;
+  }
+
+  .about__text {
+    font-size: 1.0625rem;
+    color: var(--muted);
+    max-width: 580px;
+    line-height: 1.7;
+  }
+
+  /* Contact cards */
+  .about__contact {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    max-width: 480px;
+    margin-bottom: 2.5rem;
+  }
+
+  .contact-card {
+    display: flex;
+    align-items: center;
+    gap: 1.25rem;
+    padding: 1.25rem 1.5rem;
+    background: var(--bg);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-md);
+    color: var(--text);
+    transition: border-color 0.25s ease, transform 0.2s var(--ease-spring), box-shadow 0.25s ease;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .contact-card::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 0;
+    bottom: 0;
+    width: 0;
+    background: rgba(244, 194, 13, 0.06);
+    transition: width 0.3s ease;
+  }
+
+  .contact-card:hover::before {
+    width: 100%;
+  }
+
+  .contact-card:hover {
+    border-color: rgba(244, 194, 13, 0.4);
+    transform: translateX(4px);
+    box-shadow: 0 0 20px rgba(244, 194, 13, 0.08);
+  }
+
+  .contact-card__icon {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background: rgba(244, 194, 13, 0.1);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--accent);
+    flex-shrink: 0;
+    position: relative;
+  }
+
+  .contact-card__body {
+    flex: 1;
+    position: relative;
+  }
+
+  .contact-card__platform {
+    font-size: 0.75rem;
+    color: var(--muted);
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    margin-bottom: 0.125rem;
+  }
+
+  .contact-card__handle {
+    font-size: 1rem;
+    font-weight: 600;
+    color: var(--text);
+  }
+
+  .contact-card__arrow {
+    color: var(--muted);
+    flex-shrink: 0;
+    position: relative;
+    transition: color 0.25s ease, transform 0.25s var(--ease-spring);
+  }
+
+  .contact-card:hover .contact-card__arrow {
+    color: var(--accent);
+    transform: translateX(4px);
+  }
+
+  /* Hashtags */
+  .about__hashtags {
+    display: flex;
+    gap: 0.75rem;
+    flex-wrap: wrap;
+  }
+
+  .about__hashtag {
+    font-size: 0.8125rem;
+    color: var(--muted);
+    font-family: var(--font-mono);
+    border: 1px solid var(--border);
+    padding: 0.375rem 0.75rem;
+    border-radius: var(--radius-sm);
+    transition: color 0.25s ease, border-color 0.25s ease;
+  }
+
+  .about__hashtag:hover {
+    color: var(--accent);
+    border-color: rgba(244, 194, 13, 0.3);
+  }
+
+  @media (max-width: 480px) {
+    .contact-card {
+      padding: 1rem 1.25rem;
+      gap: 1rem;
+    }
+
+    .contact-card__icon {
+      width: 36px;
+      height: 36px;
+    }
+  }
+</style>

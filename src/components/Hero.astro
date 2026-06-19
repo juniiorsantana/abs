@@ -1,0 +1,281 @@
+---
+---
+
+<section class="hero" id="hero" aria-label="Seção principal">
+  <!-- Background elements -->
+  <div class="hero__bg" aria-hidden="true">
+    <div class="hero__bg-line hero__bg-line--1"></div>
+    <div class="hero__bg-line hero__bg-line--2"></div>
+    <div class="hero__bg-grid"></div>
+  </div>
+
+  <div class="hero__container">
+    <!-- Tag line above title -->
+    <p class="hero__eyebrow reveal delay-1">Cáceres · MT · Moto táxi via app</p>
+
+    <h1 class="hero__title reveal delay-2">
+      Vai de ABS<span class="hero__dot">.</span>
+    </h1>
+
+    <p class="hero__sub reveal delay-3">
+      A forma mais moderna de se mover em Cáceres.<br />
+      Você vê o preço antes de confirmar, acompanha a moto chegando<br class="br-desktop" />
+      e paga sem precisar ter dinheiro na mão.
+    </p>
+
+    <div class="hero__buttons reveal delay-4">
+      <a href="#precos" class="btn btn--primary" id="cta-pedir-corrida">
+        <span>Pedir uma corrida</span>
+        <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true">
+          <path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+      </a>
+      <a href="#motoboy" class="btn btn--secondary" id="cta-ser-motoboy">Quero ser motoboy ABS</a>
+    </div>
+
+    <p class="hero__tagline reveal delay-5">
+      <span class="hero__tagline-line" aria-hidden="true"></span>
+      Feito em Cáceres, pra Cáceres.
+      <span class="hero__tagline-line" aria-hidden="true"></span>
+    </p>
+  </div>
+
+  <!-- Stats bar -->
+  <div class="hero__stats reveal delay-6" aria-label="Diferenciais">
+    <div class="hero__stat">
+      <span class="hero__stat-value mono">R$10</span>
+      <span class="hero__stat-label">piso por corrida</span>
+    </div>
+    <div class="hero__stat-divider" aria-hidden="true"></div>
+    <div class="hero__stat">
+      <span class="hero__stat-value mono">90%</span>
+      <span class="hero__stat-label">fica com o motoboy</span>
+    </div>
+    <div class="hero__stat-divider" aria-hidden="true"></div>
+    <div class="hero__stat">
+      <span class="hero__stat-value mono">100%</span>
+      <span class="hero__stat-label">preço visível antes</span>
+    </div>
+  </div>
+</section>
+
+<style>
+  .hero {
+    min-height: 100svh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    padding: var(--section-pad-y) var(--section-pad-x) 0;
+    position: relative;
+    overflow: hidden;
+  }
+
+  /* Background design elements */
+  .hero__bg {
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+  }
+
+  .hero__bg-grid {
+    position: absolute;
+    inset: 0;
+    background-image:
+      linear-gradient(rgba(244, 194, 13, 0.03) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(244, 194, 13, 0.03) 1px, transparent 1px);
+    background-size: 60px 60px;
+    mask-image: radial-gradient(ellipse at center, black 30%, transparent 80%);
+  }
+
+  .hero__bg-line {
+    position: absolute;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, var(--accent), transparent);
+    opacity: 0.15;
+  }
+
+  .hero__bg-line--1 {
+    width: 60%;
+    top: 35%;
+    left: 20%;
+    animation: slide-line 4s ease-in-out infinite alternate;
+  }
+
+  .hero__bg-line--2 {
+    width: 40%;
+    bottom: 30%;
+    left: 30%;
+    animation: slide-line 6s ease-in-out infinite alternate-reverse;
+    opacity: 0.08;
+  }
+
+  @keyframes slide-line {
+    from { transform: scaleX(0.7); opacity: 0.08; }
+    to { transform: scaleX(1); opacity: 0.18; }
+  }
+
+  /* Content */
+  .hero__container {
+    max-width: var(--container-max);
+    width: 100%;
+    position: relative;
+    z-index: 1;
+    margin-block: auto;
+    padding-bottom: 2rem;
+  }
+
+  .hero__container::before {
+    content: '';
+    position: absolute;
+    width: 600px;
+    height: 400px;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background: radial-gradient(ellipse, rgba(244, 194, 13, 0.06) 0%, transparent 70%);
+    pointer-events: none;
+    z-index: -1;
+  }
+
+  .hero__eyebrow {
+    font-size: 0.75rem;
+    font-weight: 600;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: 1.5rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.75rem;
+  }
+
+  .hero__eyebrow::before,
+  .hero__eyebrow::after {
+    content: '';
+    display: block;
+    width: 2rem;
+    height: 1px;
+    background: var(--accent);
+    opacity: 0.5;
+  }
+
+  .hero__title {
+    font-size: clamp(3.5rem, 13vw, 8rem);
+    font-weight: 900;
+    letter-spacing: -0.04em;
+    line-height: 0.95;
+    margin-bottom: 2rem;
+  }
+
+  .hero__dot {
+    display: inline-block;
+    color: var(--accent);
+    animation: pulse-led 2s ease-in-out infinite;
+  }
+
+  .hero__sub {
+    font-size: clamp(1rem, 2.5vw, 1.125rem);
+    color: var(--muted);
+    max-width: 600px;
+    margin-inline: auto;
+    margin-bottom: 2.5rem;
+    line-height: 1.7;
+  }
+
+  .br-desktop {
+    display: none;
+  }
+
+  @media (min-width: 640px) {
+    .br-desktop { display: block; }
+  }
+
+  /* Buttons */
+  .hero__buttons {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem;
+    justify-content: center;
+    margin-bottom: 2.5rem;
+  }
+
+  /* .btn classes are global — see Layout.astro */
+
+  /* Tagline */
+  .hero__tagline {
+    font-size: 0.75rem;
+    color: var(--muted);
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 1rem;
+  }
+
+  .hero__tagline-line {
+    display: block;
+    width: 40px;
+    height: 1px;
+    background: var(--muted);
+    opacity: 0.4;
+  }
+
+  /* Stats bar */
+  .hero__stats {
+    width: 100%;
+    margin-top: auto;
+    display: flex;
+    align-items: stretch;
+    border-top: 1px solid var(--border);
+    background: rgba(26, 26, 28, 0.6);
+    backdrop-filter: blur(4px);
+    -webkit-backdrop-filter: blur(4px);
+  }
+
+  .hero__stat {
+    flex: 1;
+    padding: 1.25rem 1rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.25rem;
+  }
+
+  .hero__stat-divider {
+    width: 1px;
+    background: var(--border);
+    align-self: stretch;
+    flex-shrink: 0;
+  }
+
+  .hero__stat-value {
+    font-size: 1.25rem;
+    color: var(--accent);
+    line-height: 1;
+  }
+
+  .hero__stat-label {
+    font-size: 0.7rem;
+    color: var(--muted);
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    text-align: center;
+  }
+
+  @media (max-width: 480px) {
+    .hero__stat-label {
+      font-size: 0.6rem;
+      letter-spacing: 0.04em;
+    }
+    .hero__stat-value {
+      font-size: 1rem;
+    }
+    .hero__stat {
+      padding: 0.875rem 0.5rem;
+      gap: 0.125rem;
+    }
+  }
+</style>

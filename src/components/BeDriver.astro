@@ -1,0 +1,293 @@
+---
+const benefits = [
+  {
+    highlight: true,
+    value: '90',
+    unit: '%',
+    label: 'de cada corrida fica com você',
+    detail: 'O mercado tradicional fica entre 75% e 85%.',
+  },
+  {
+    highlight: false,
+    value: null,
+    label: 'Você escolhe seu horário, sem patrão',
+    detail: 'Trabalhe quando quiser. A demanda está no app.',
+  },
+  {
+    highlight: false,
+    value: null,
+    label: 'Renda extra ou principal — você decide',
+    detail: 'Corra no seu ritmo, com controle total.',
+  },
+];
+---
+
+<section class="driver section--surface" id="motoboy" aria-labelledby="driver-title">
+  <div class="driver__container">
+
+    <div class="driver__header">
+      <p class="eyebrow reveal">Para motoboys</p>
+      <h2 class="section-title reveal delay-1" id="driver-title">
+        Motoboy em Cáceres?<br />O cliente vem até você.
+      </h2>
+      <p class="driver__text reveal delay-2">
+        Cansou de ficar parado no ponto esperando passageiro? O ABS te avisa
+        quando tem corrida por perto — você não precisa correr atrás de cliente.
+      </p>
+    </div>
+
+    <!-- Big stat feature -->
+    <div class="driver__big-stat reveal delay-2">
+      <div class="driver__big-stat-inner">
+        <p class="driver__big-stat-label">Você fica com</p>
+        <div class="driver__big-stat-value">
+          <span class="mono" data-counter="90" aria-label="90 por cento">90</span>
+          <span class="driver__big-stat-unit mono">%</span>
+        </div>
+        <p class="driver__big-stat-sub">de cada corrida</p>
+        <div class="driver__big-stat-bar" aria-hidden="true">
+          <div class="driver__big-stat-bar-fill" data-target-width="90" style="width: 90%"></div>
+          <div class="driver__big-stat-bar-label">
+            <span style="left: 75%">Mercado</span>
+            <span style="left: 90%">ABS</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Benefits list -->
+    <ul class="driver__benefits" aria-label="Benefícios de ser motoboy ABS">
+      {benefits.filter(b => !b.value).map((b, i) => (
+        <li class="benefit reveal" style={`transition-delay: ${(i + 1) * 0.12}s`}>
+          <div class="benefit__icon" aria-hidden="true">
+            <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
+              <path d="M3 8l3 3 7-6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+          </div>
+          <div class="benefit__body">
+            <p class="benefit__label">{b.label}</p>
+            <p class="benefit__detail">{b.detail}</p>
+          </div>
+        </li>
+      ))}
+    </ul>
+
+    <a
+      href="#contato"
+      class="btn btn--primary reveal delay-4"
+      id="cta-motoboy"
+    >
+      <span>Quero rodar com o ABS</span>
+      <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true">
+        <path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+      </svg>
+    </a>
+
+  </div>
+</section>
+
+<style>
+  .driver {
+    padding: var(--section-pad-y) var(--section-pad-x);
+    position: relative;
+  }
+
+  .driver__container {
+    max-width: var(--container-max);
+    margin: 0 auto;
+    position: relative;
+    z-index: 2;
+  }
+
+  .driver__header {
+    margin-bottom: 3.5rem;
+  }
+
+  .driver__header .section-title {
+    margin-bottom: 1.25rem;
+  }
+
+  .driver__text {
+    font-size: 1.0625rem;
+    color: var(--muted);
+    max-width: 580px;
+    line-height: 1.7;
+  }
+
+  /* Big Stat Block */
+  .driver__big-stat {
+    margin-bottom: 3rem;
+  }
+
+  .driver__big-stat-inner {
+    display: inline-block;
+    border: 1px solid var(--border-solid);
+    border-radius: var(--radius-md);
+    padding: 2rem 2.5rem;
+    background: var(--bg);
+    position: relative;
+    overflow: hidden;
+    max-width: 100%;
+  }
+
+  .driver__big-stat-inner::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 2px;
+    background: var(--accent);
+  }
+
+  .driver__big-stat-label {
+    font-size: 0.8125rem;
+    color: var(--muted);
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    margin-bottom: 0.5rem;
+  }
+
+  .driver__big-stat-value {
+    display: flex;
+    align-items: flex-start;
+    line-height: 1;
+    margin-bottom: 0.5rem;
+  }
+
+  .driver__big-stat-value .mono {
+    font-size: clamp(4rem, 12vw, 7rem);
+    color: var(--accent);
+    line-height: 1;
+  }
+
+  .driver__big-stat-unit {
+    font-size: 2.5rem !important;
+    margin-top: 0.75rem;
+    margin-left: 0.25rem;
+    color: var(--accent);
+  }
+
+  .driver__big-stat-sub {
+    font-size: 0.875rem;
+    color: var(--muted);
+    margin-bottom: 1.5rem;
+  }
+
+  /* Comparison bar */
+  .driver__big-stat-bar {
+    position: relative;
+    width: min(260px, 100%);
+    height: 4px;
+    background: var(--surface-2);
+    border-radius: 2px;
+  }
+
+  .driver__big-stat-bar-fill {
+    height: 100%;
+    background: var(--accent);
+    border-radius: 2px;
+    position: relative;
+    transition: width 1.2s var(--ease-out-expo);
+  }
+
+  .driver__big-stat-bar-label {
+    position: relative;
+    margin-top: 0.5rem;
+    font-size: 0.6875rem;
+    color: var(--muted);
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+  }
+
+  .driver__big-stat-bar-label span {
+    position: absolute;
+    transform: translateX(-50%);
+    white-space: nowrap;
+  }
+
+  .driver__big-stat-bar-label span:last-child {
+    color: var(--accent);
+  }
+
+  /* Benefits list */
+  .driver__benefits {
+    list-style: none;
+    display: grid;
+    gap: 1rem;
+    margin-bottom: 3rem;
+    max-width: 560px;
+  }
+
+  .benefit {
+    display: flex;
+    align-items: flex-start;
+    gap: 1rem;
+    padding: 1.25rem;
+    background: var(--bg);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-md);
+    transition: border-color 0.25s ease;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .benefit::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 0;
+    bottom: 0;
+    width: 2px;
+    background: var(--accent);
+    opacity: 0;
+    transition: opacity 0.25s ease;
+  }
+
+  .benefit:hover {
+    border-color: rgba(244, 194, 13, 0.25);
+  }
+
+  .benefit:hover::before {
+    opacity: 1;
+  }
+
+  .benefit__icon {
+    width: 28px;
+    height: 28px;
+    border-radius: 50%;
+    background: rgba(244, 194, 13, 0.12);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    color: var(--accent);
+    margin-top: 0.1rem;
+  }
+
+  .benefit__body {
+    flex: 1;
+  }
+
+  .benefit__label {
+    font-size: 1rem;
+    font-weight: 600;
+    color: var(--text);
+    margin-bottom: 0.25rem;
+  }
+
+  .benefit__detail {
+    font-size: 0.875rem;
+    color: var(--muted);
+    line-height: 1.5;
+  }
+
+  /* CTA uses global .btn .btn--primary */
+
+  @media (max-width: 480px) {
+    .driver__big-stat-inner {
+      padding: 1.5rem 1.25rem;
+      display: block;
+    }
+  }
+</style>

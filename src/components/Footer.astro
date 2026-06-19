@@ -1,0 +1,158 @@
+---
+---
+
+<footer class="footer" role="contentinfo">
+  <div class="footer__container">
+    <div class="footer__top">
+      <div class="footer__brand">
+        <p class="footer__name">
+          Vai de ABS<span class="footer__dot">.</span>
+        </p>
+        <p class="footer__tagline">Moto táxi via app em Cáceres · MT</p>
+      </div>
+
+      <div class="footer__links" aria-label="Links de navegação">
+        <a href="#como-funciona" class="footer__link">Como funciona</a>
+        <a href="#motoboy" class="footer__link">Seja motoboy</a>
+        <a href="#precos" class="footer__link">Preços</a>
+        <a href="#contato" class="footer__link">Contato</a>
+      </div>
+
+      <a href="#hero" class="footer__back-top" aria-label="Voltar ao topo">
+        <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true">
+          <path d="M8 12V4M4 8l4-4 4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+        <span>Voltar ao topo</span>
+      </a>
+    </div>
+
+    <div class="footer__bottom">
+      <p class="footer__copy">
+        © <span id="footer-year"></span> Vai de ABS. Todos os direitos reservados.
+      </p>
+      <p class="footer__locale">Cáceres, Mato Grosso · Brasil</p>
+    </div>
+  </div>
+</footer>
+
+<script>
+  const yearEl = document.getElementById('footer-year');
+  if (yearEl) yearEl.textContent = String(new Date().getFullYear());
+</script>
+
+<style>
+  .footer {
+    padding: 4rem var(--section-pad-x) 2.5rem;
+    border-top: 1px solid var(--border);
+    background: var(--bg);
+  }
+
+  .footer__container {
+    max-width: var(--container-max);
+    margin: 0 auto;
+  }
+
+  /* Top row */
+  .footer__top {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: 2rem;
+    padding-bottom: 2.5rem;
+  }
+
+  /* Brand */
+  .footer__brand {
+    display: flex;
+    flex-direction: column;
+    gap: 0.375rem;
+  }
+
+  .footer__name {
+    font-family: var(--font-display);
+    font-weight: 900;
+    font-size: 1.5rem;
+    letter-spacing: -0.03em;
+    color: var(--text);
+    line-height: 1;
+  }
+
+  .footer__dot {
+    color: var(--accent);
+    animation: pulse-led 2s ease-in-out infinite;
+  }
+
+  .footer__tagline {
+    font-size: 0.8125rem;
+    color: var(--muted);
+    letter-spacing: 0.05em;
+  }
+
+  /* Links */
+  .footer__links {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem 2rem;
+  }
+
+  .footer__link {
+    font-size: 0.875rem;
+    color: var(--muted);
+    transition: color 0.2s ease;
+  }
+
+  .footer__link:hover {
+    color: var(--text);
+  }
+
+  /* Back to top */
+  .footer__back-top {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-size: 0.8125rem;
+    color: var(--muted);
+    transition: color 0.2s ease;
+    white-space: nowrap;
+  }
+
+  .footer__back-top:hover {
+    color: var(--accent);
+  }
+
+  /* Bottom */
+  .footer__bottom {
+    padding-top: 2rem;
+    border-top: 1px solid var(--border);
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    gap: 0.5rem;
+  }
+
+  .footer__copy,
+  .footer__locale {
+    font-size: 0.75rem;
+    color: var(--muted);
+  }
+
+  .footer__locale {
+    font-family: var(--font-mono);
+  }
+
+  @media (max-width: 640px) {
+    .footer__top {
+      flex-direction: column;
+      gap: 1.5rem;
+    }
+
+    .footer__links {
+      flex-direction: column;
+      gap: 0.75rem;
+    }
+
+    .footer__back-top {
+      align-self: flex-start;
+    }
+  }
+</style>

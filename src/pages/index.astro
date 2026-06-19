@@ -1,0 +1,169 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Hero from '../components/Hero.astro';
+import HowItWorks from '../components/HowItWorks.astro';
+import BeDriver from '../components/BeDriver.astro';
+import Pricing from '../components/Pricing.astro';
+import About from '../components/About.astro';
+import Footer from '../components/Footer.astro';
+---
+
+<Layout>
+  <Hero />
+  <HowItWorks />
+  <BeDriver />
+  <Pricing />
+  <About />
+  <Footer />
+</Layout>
+
+<script>
+  // ─── Scroll progress bar ─────────────────────────────────────────────────────
+  const progressBar = document.getElementById('scroll-progress');
+  function updateProgress() {
+    if (!progressBar) return;
+    const scrollTop = window.scrollY;
+    const docHeight = document.documentElement.scrollHeight - window.innerHeight;
+    const pct = docHeight > 0 ? (scrollTop / docHeight) * 100 : 0;
+    progressBar.style.width = `${pct}%`;
+  }
+
+  // ─── Navbar sticky behavior ───────────────────────────────────────────────────
+  const navbar = document.getElementById('navbar');
+  function updateNavbar() {
+    if (!navbar) return;
+    if (window.scrollY > 60) {
+      navbar.classList.add('scrolled');
+    } else {
+      navbar.classList.remove('scrolled');
+    }
+  }
+
+  // ─── Scroll reveal (IntersectionObserver) ────────────────────────────────────
+  const prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  const revealEls = document.querySelectorAll('.reveal, .reveal-left');
+
+  if (prefersReduced) {
+    revealEls.forEach((el) => el.classList.add('visible'));
+  } else {
+    const revealObserver = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('visible');
+            revealObserver.unobserve(entry.target);
+          }
+        });
+      },
+      { threshold: 0.12, rootMargin: '0px 0px -40px 0px' }
+    );
+    revealEls.forEach((el) => revealObserver.observe(el));
+  }
+
+  // ─── Counter animation ────────────────────────────────────────────────────────
+  const counters = document.querySelectorAll<HTMLElement>('[data-counter]');
+
+  if (counters.length > 0 && !prefersReduced) {
+    const counterObserver = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (!entry.isIntersecting) return;
+
+          const el = entry.target as HTMLElement;
+          const target = parseInt(el.dataset.counter!, 10);
+
+          if (isNaN(target)) return;
+
+          let current = 0;
+          const duration = 1400;
+          const start = performance.now();
+
+          function tick(now: number) {
+            const elapsed = now - start;
+            const progress = Math.min(elapsed / duration, 1);
+            // Ease out cubic
+            const eased = 1 - Math.pow(1 - progress, 3);
+            current = Math.round(eased * target);
+            el.textContent = String(current);
+            if (progress < 1) requestAnimationFrame(tick);
+          }
+
+          requestAnimationFrame(tick);
+          counterObserver.unobserve(el);
+        });
+      },
+      { threshold: 0.6 }
+    );
+
+    counters.forEach((el) => counterObserver.observe(el));
+  } else {
+    // No animation — just show the value
+    counters.forEach((el) => {
+      el.textContent = el.dataset.counter!;
+    });
+  }
+
+  // ─── Mobile hamburger menu ────────────────────────────────────────────────────
+  const navToggle = document.getElementById('nav-toggle');
+  const navMobile = document.getElementById('nav-mobile');
+
+  if (navToggle && navMobile) {
+    navToggle.addEventListener('click', () => {
+      const isOpen = navToggle.getAttribute('aria-expanded') === 'true';
+      navToggle.setAttribute('aria-expanded', String(!isOpen));
+      navToggle.setAttribute('aria-label', isOpen ? 'Abrir menu' : 'Fechar menu');
+      navMobile.setAttribute('aria-hidden', String(isOpen));
+      document.body.style.overflow = isOpen ? '' : 'hidden';
+    });
+
+    navMobile.querySelectorAll('a').forEach((link) => {
+      link.addEventListener('click', () => {
+        navToggle.setAttribute('aria-expanded', 'false');
+        navToggle.setAttribute('aria-label', 'Abrir menu');
+        navMobile.setAttribute('aria-hidden', 'true');
+        document.body.style.overflow = '';
+      });
+    });
+  }
+
+  // ─── Comparison bar animation (BeDriver) ─────────────────────────────────────
+  const barFill = document.querySelector<HTMLElement>('.driver__big-stat-bar-fill');
+  if (barFill && !prefersReduced) {
+    const tw = parseFloat(barFill.dataset.targetWidth || '90');
+    barFill.style.width = '0%';
+
+    const barObserver = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            setTimeout(() => {
+              if (barFill) barFill.style.width = `${tw}%`;
+            }, 400);
+            barObserver.unobserve(entry.target);
+          }
+        });
+      },
+      { threshold: 0.5 }
+    );
+
+    if (barFill.parentElement) barObserver.observe(barFill.parentElement);
+  }
+
+  // ─── Consolidated scroll handler ─────────────────────────────────────────────
+  let ticking = false;
+  window.addEventListener('scroll', () => {
+    if (!ticking) {
+      requestAnimationFrame(() => {
+        updateProgress();
+        updateNavbar();
+        ticking = false;
+      });
+      ticking = true;
+    }
+  }, { passive: true });
+
+  // Initial calls
+  updateProgress();
+  updateNavbar();
+</script>
