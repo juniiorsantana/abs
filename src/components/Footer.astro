@@ -12,13 +12,41 @@
       </div>
 
       <div class="footer__links" aria-label="Links de navegação">
-        <a href="#como-funciona" class="footer__link">Como funciona</a>
-        <a href="#motoboy" class="footer__link">Seja motoboy</a>
-        <a href="#precos" class="footer__link">Preços</a>
-        <a href="#contato" class="footer__link">Contato</a>
+        <a href="/#como-funciona" class="footer__link">Como funciona</a>
+        <a href="/#motoboy" class="footer__link">Seja motoboy</a>
+        <a href="/#precos" class="footer__link">Preços</a>
+        <a href="/#duvidas" class="footer__link">Dúvidas</a>
+        <a href="/#contato" class="footer__link">Contato</a>
       </div>
 
-      <a href="#hero" class="footer__back-top" aria-label="Voltar ao topo">
+      <div class="footer__social" aria-label="Redes sociais">
+        <a
+          href="https://www.instagram.com/pedeabscaceres/"
+          class="footer__social-link"
+          target="_blank"
+          rel="noopener noreferrer"
+          aria-label="Instagram do Vai de ABS"
+        >
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <rect x="2" y="2" width="20" height="20" rx="5" ry="5"/>
+            <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/>
+            <line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/>
+          </svg>
+        </a>
+        <a
+          href="https://wa.me/5565996164735"
+          class="footer__social-link"
+          target="_blank"
+          rel="noopener noreferrer"
+          aria-label="WhatsApp do Vai de ABS"
+        >
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"/>
+          </svg>
+        </a>
+      </div>
+
+      <a href="/#hero" class="footer__back-top" aria-label="Voltar ao topo">
         <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true">
           <path d="M8 12V4M4 8l4-4 4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
         </svg>
@@ -30,6 +58,11 @@
       <p class="footer__copy">
         © <span id="footer-year"></span> Vai de ABS. Todos os direitos reservados.
       </p>
+      <div class="footer__legal" aria-label="Documentos legais">
+        <a href="/termos" class="footer__legal-link">Termos de uso</a>
+        <span class="footer__legal-sep" aria-hidden="true">·</span>
+        <a href="/privacidade" class="footer__legal-link">Privacidade</a>
+      </div>
       <p class="footer__locale">Cáceres, Mato Grosso · Brasil</p>
     </div>
   </div>
@@ -96,13 +129,54 @@
   }
 
   .footer__link {
+    position: relative;
     font-size: 0.875rem;
     color: var(--muted);
     transition: color 0.2s ease;
   }
 
+  .footer__link::after {
+    content: '';
+    position: absolute;
+    left: 0;
+    bottom: -3px;
+    width: 0;
+    height: 1px;
+    background: var(--accent);
+    transition: width 0.3s var(--ease-out-expo);
+  }
+
   .footer__link:hover {
     color: var(--text);
+  }
+
+  .footer__link:hover::after {
+    width: 100%;
+  }
+
+  /* Social icons */
+  .footer__social {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+  }
+
+  .footer__social-link {
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    border: 1px solid var(--border);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--muted);
+    transition: color 0.2s ease, border-color 0.2s ease, transform 0.2s var(--ease-spring);
+  }
+
+  .footer__social-link:hover {
+    color: var(--accent);
+    border-color: var(--border-solid);
+    transform: translateY(-2px);
   }
 
   /* Back to top */
@@ -116,8 +190,16 @@
     white-space: nowrap;
   }
 
+  .footer__back-top svg {
+    transition: transform 0.25s var(--ease-spring);
+  }
+
   .footer__back-top:hover {
     color: var(--accent);
+  }
+
+  .footer__back-top:hover svg {
+    transform: translateY(-3px);
   }
 
   /* Bottom */
@@ -134,6 +216,27 @@
   .footer__locale {
     font-size: 0.75rem;
     color: var(--muted);
+  }
+
+  .footer__legal {
+    display: flex;
+    align-items: center;
+    gap: 0.625rem;
+    font-size: 0.75rem;
+    color: var(--muted);
+  }
+
+  .footer__legal-link {
+    color: var(--muted);
+    transition: color 0.2s ease;
+  }
+
+  .footer__legal-link:hover {
+    color: var(--text);
+  }
+
+  .footer__legal-sep {
+    opacity: 0.5;
   }
 
   .footer__locale {

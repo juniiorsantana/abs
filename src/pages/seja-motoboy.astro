@@ -1,0 +1,1098 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Footer from '../components/Footer.astro';
+
+const benefits = [
+  {
+    title: 'Você escolhe seu horário',
+    detail: 'De manhã, à noite ou só no fim de semana. Sem escala, sem patrão.',
+    icon: '<circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 3"/>',
+  },
+  {
+    title: 'Corridas e entregas',
+    detail: 'Duas fontes de chamada no mesmo app, mais chance de rodar.',
+    icon: '<circle cx="18" cy="18" r="3"/><circle cx="6" cy="6" r="3"/><path d="M6 9v6a3 3 0 0 0 3 3h9"/><path d="M18 15V9a3 3 0 0 0-3-3H6"/>',
+  },
+  {
+    title: 'Fica com 90%',
+    detail: 'O mercado tradicional paga menos. Aqui, quase tudo é seu.',
+    icon: '<path d="M12 1v22"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/>',
+  },
+  {
+    title: 'Pagamento direto no app',
+    detail: 'Rodou, recebeu. Sem calote, sem burocracia.',
+    icon: '<rect x="1" y="4" width="22" height="16" rx="2" ry="2"/><line x1="1" y1="10" x2="23" y2="10"/>',
+  },
+  {
+    title: 'Suporte de verdade',
+    detail: 'Falou no WhatsApp, a gente responde. Sem robô, sem fila de espera.',
+    icon: '<path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"/>',
+  },
+  {
+    title: 'Toda Cáceres',
+    detail: 'Cidade compacta — menos deslocamento vazio, mais corrida por perto.',
+    icon: '<path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 1 1 18 0z"/><circle cx="12" cy="10" r="3"/>',
+  },
+];
+
+const steps = [
+  {
+    number: '01',
+    title: 'Chama no WhatsApp',
+    detail: 'Manda seu nome e cidade, a gente te explica o resto.',
+  },
+  {
+    number: '02',
+    title: 'Envia seus documentos',
+    detail: 'CNH ativa e documento da moto em dia.',
+  },
+  {
+    number: '03',
+    title: 'Confirmamos seu cadastro',
+    detail: 'Validamos rapidinho, direto pelo WhatsApp.',
+  },
+  {
+    number: '04',
+    title: 'Comece a rodar',
+    detail: 'Acesso liberado — já pode aceitar corridas e entregas.',
+  },
+];
+
+const requirements = [
+  'CNH categoria A válida',
+  'Moto própria, documentação em dia',
+  'Disponibilidade pra rodar em Cáceres',
+];
+
+const faqs = [
+  {
+    q: 'Preciso ter moto própria?',
+    a: 'Sim. A moto é sua, precisa estar regularizada e com os documentos em dia.',
+  },
+  {
+    q: 'Como e quando eu recebo?',
+    a: 'O pagamento é digital, direto pelo app — sem precisar de dinheiro em mãos ou acerto manual com o passageiro.',
+  },
+  {
+    q: 'Posso rodar só em alguns horários?',
+    a: 'Sim. Você escolhe quando ficar disponível no app — não existe escala fixa.',
+  },
+  {
+    q: 'O ABS atende toda Cáceres?',
+    a: 'Sim, atendemos toda a área urbana da cidade.',
+  },
+  {
+    q: 'Preciso pagar alguma taxa pra começar?',
+    a: 'Tem uma taxa de adesão, mas os 20 primeiros motoboys cadastrados entram isentos. Depois de preenchidas as vagas, a adesão passa a valer normalmente.',
+  },
+];
+
+const faqSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'FAQPage',
+  mainEntity: faqs.map((f) => ({
+    '@type': 'Question',
+    name: f.q,
+    acceptedAnswer: { '@type': 'Answer', text: f.a },
+  })),
+};
+
+const WHATSAPP = 'https://wa.me/5565996164735?text=Quero%20ser%20motoboy%20parceiro%20do%20ABS';
+---
+
+<Layout
+  title="Seja motoboy parceiro — Vai de ABS"
+  description="Corridas e entregas no seu celular. Escolha seu horário, fique com 90% de cada corrida e garanta isenção de adesão sendo um dos 20 primeiros cadastrados."
+>
+  <section class="mb-hero" id="mb-hero" aria-labelledby="mb-hero-title">
+    <div class="mb-hero__container">
+      <p class="eyebrow reveal">Lançamento em Cáceres</p>
+      <h1 class="mb-hero__title reveal delay-1" id="mb-hero-title">
+        Transforme Km's<br />em renda extra.
+      </h1>
+      <p class="mb-hero__sub reveal delay-2">
+        Corridas e entregas no seu celular. Você escolhe o horário, roda no seu
+        ritmo e fica com 90% de cada corrida.
+      </p>
+
+      <a href={WHATSAPP} class="btn btn--primary reveal delay-3" id="cta-hero-motoboy" target="_blank" rel="noopener noreferrer">
+        <span>Quero ser motoboy ABS</span>
+        <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true">
+          <path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path>
+        </svg>
+      </a>
+
+      <div class="mb-hero__chips reveal delay-4" aria-label="Vantagens de rodar com o ABS">
+        <span class="mb-chip">90% de repasse por corrida</span>
+        <span class="mb-chip mb-chip--accent">Isenção de adesão pros 20 primeiros</span>
+        <span class="mb-chip">Pagamento direto no app</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- Banner de vagas -->
+  <section class="mb-slots" aria-labelledby="mb-slots-title">
+    <div class="mb-slots__inner reveal">
+      <svg class="mb-slots__icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+        <path d="M12 9v4M12 17h.01"/>
+        <path d="M10.29 3.86 1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L14.71 3.86a2 2 0 0 0-3.42 0z"/>
+      </svg>
+      <p class="mb-slots__text" id="mb-slots-title">
+        Os <strong>20 primeiros</strong> motoboys cadastrados entram sem pagar taxa de adesão. Depois disso, a isenção acaba.
+      </p>
+      <a href={WHATSAPP} class="mb-slots__cta" target="_blank" rel="noopener noreferrer">
+        Garantir minha vaga
+        <svg width="14" height="14" viewBox="0 0 16 16" fill="none" aria-hidden="true">
+          <path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path>
+        </svg>
+      </a>
+    </div>
+  </section>
+
+  <!-- Benefícios -->
+  <section class="mb-benefits section--surface" aria-labelledby="mb-benefits-title">
+    <div class="mb-benefits__container">
+      <div class="mb-benefits__header">
+        <p class="eyebrow reveal">Por que rodar com a gente</p>
+        <h2 class="section-title reveal delay-1" id="mb-benefits-title">
+          Sua moto, suas regras.
+        </h2>
+      </div>
+
+      <div class="mb-benefits__grid">
+        {benefits.map((b, i) => (
+          <div class="mb-card reveal" style={`transition-delay: ${(i % 3 + 1) * 0.1}s`}>
+            <div class="mb-card__icon" aria-hidden="true">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" set:html={b.icon} />
+            </div>
+            <h3 class="mb-card__title">{b.title}</h3>
+            <p class="mb-card__detail">{b.detail}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- Simulador de ganhos -->
+  <section class="mb-calc" aria-labelledby="mb-calc-title">
+    <div class="mb-calc__container">
+      <div class="mb-calc__header">
+        <p class="eyebrow reveal">Simule seu ganho</p>
+        <h2 class="section-title reveal delay-1" id="mb-calc-title">
+          Quanto você pode ganhar<br />rodando com a gente.
+        </h2>
+      </div>
+
+      <aside class="mb-panel reveal delay-2" aria-label="Calculadora de renda estimada">
+        <div class="mb-panel__header">
+          <span class="mb-panel__label">Simule seu ganho</span>
+          <span class="mb-panel__status mono" aria-hidden="true">● AO VIVO</span>
+        </div>
+
+        <div class="mb-panel__body">
+          <div class="calc__row">
+            <div class="calc__row-top">
+              <label for="mb-calc-hours">Horas rodadas por dia</label>
+              <span class="calc__row-value mono" id="mb-calc-hours-value">2h</span>
+            </div>
+            <input type="range" id="mb-calc-hours" min="1" max="10" step="1" value="2" aria-describedby="mb-calc-result-label" />
+          </div>
+
+          <div class="calc__row">
+            <div class="calc__row-top">
+              <label for="mb-calc-rides">Corridas por hora</label>
+              <span class="calc__row-value mono" id="mb-calc-rides-value">4</span>
+            </div>
+            <input type="range" id="mb-calc-rides" min="1" max="6" step="1" value="4" aria-describedby="mb-calc-result-label" />
+          </div>
+
+          <div class="calc__row">
+            <div class="calc__row-top">
+              <label for="mb-calc-fare">Valor médio da corrida</label>
+              <span class="calc__row-value mono" id="mb-calc-fare-value">R$12</span>
+            </div>
+            <input type="range" id="mb-calc-fare" min="8" max="18" step="1" value="12" aria-describedby="mb-calc-result-label" />
+          </div>
+
+          <div class="calc__formula mono" aria-hidden="true">
+            <span id="mb-calc-hours-echo">2h</span>
+            <span class="calc__formula-op">×</span>
+            <span id="mb-calc-rides-echo">4</span>
+            <span class="calc__formula-op">×</span>
+            <span id="mb-calc-fare-echo">R$12</span>
+          </div>
+
+          <div class="calc__result">
+            <p class="calc__result-label" id="mb-calc-result-label">Você pode ganhar</p>
+            <div class="calc__result-value">
+              <span class="calc__result-currency mono">R$</span>
+              <span class="mono" id="mb-calc-result">96</span>
+            </div>
+            <p class="calc__result-sub">por dia, em média</p>
+          </div>
+        </div>
+      </aside>
+    </div>
+  </section>
+
+  <!-- Como funciona pra começar -->
+  <section class="mb-steps section--surface" aria-labelledby="mb-steps-title">
+    <div class="mb-steps__container">
+      <div class="mb-steps__header">
+        <p class="eyebrow reveal">Como começar</p>
+        <h2 class="section-title reveal delay-1" id="mb-steps-title">
+          Do WhatsApp até a primeira corrida.
+        </h2>
+      </div>
+
+      <div class="mb-steps__grid">
+        {steps.map((s, i) => (
+          <div class="mb-step reveal" style={`transition-delay: ${(i + 1) * 0.1}s`}>
+            <span class="mb-step__number mono" aria-hidden="true">{s.number}</span>
+            <h3 class="mb-step__title">{s.title}</h3>
+            <p class="mb-step__detail">{s.detail}</p>
+            {i < steps.length - 1 && (
+              <div class="mb-step__connector" aria-hidden="true">
+                <svg width="12" height="12" viewBox="0 0 16 16" fill="none">
+                  <path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path>
+                </svg>
+              </div>
+            )}
+          </div>
+        ))}
+      </div>
+
+      <!-- Requisitos -->
+      <div class="mb-requirements reveal delay-3" aria-label="Requisitos para ser motoboy parceiro">
+        <p class="mb-requirements__title">O que você precisa ter</p>
+        <ul class="mb-requirements__list">
+          {requirements.map((r) => (
+            <li>
+              <svg width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true">
+                <path d="M3 7l3 3 5-6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path>
+              </svg>
+              <span>{r}</span>
+            </li>
+          ))}
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- FAQ -->
+  <section class="mb-faq" aria-labelledby="mb-faq-title">
+    <div class="mb-faq__container">
+      <div class="mb-faq__header">
+        <p class="eyebrow reveal">Dúvidas de quem vai rodar</p>
+        <h2 class="section-title reveal delay-1" id="mb-faq-title">
+          Perguntou,<br />respondemos.
+        </h2>
+      </div>
+
+      <div class="mb-faq__list">
+        {faqs.map((f, i) => (
+          <details class="mb-faq__item reveal" style={`transition-delay: ${(i + 1) * 0.08}s`}>
+            <summary class="mb-faq__question">
+              <span class="mb-faq__q-text">{f.q}</span>
+              <span class="mb-faq__icon" aria-hidden="true">
+                <svg width="14" height="14" viewBox="0 0 14 14" fill="none">
+                  <path d="M7 1v12M1 7h12" stroke="currentColor" stroke-width="2" stroke-linecap="round"></path>
+                </svg>
+              </span>
+            </summary>
+            <div class="mb-faq__answer">
+              <p class="mb-faq__answer-text">{f.a}</p>
+            </div>
+          </details>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA final -->
+  <section class="mb-final section--surface" aria-labelledby="mb-final-title">
+    <div class="mb-final__container reveal">
+      <h2 class="section-title" id="mb-final-title">
+        As 20 vagas de isenção<br />estão abrindo agora.
+      </h2>
+      <p class="mb-final__sub">
+        Cadastre-se e comece a rodar sem pagar taxa de adesão.
+      </p>
+      <a href={WHATSAPP} class="btn btn--primary" id="cta-final-motoboy" target="_blank" rel="noopener noreferrer">
+        <span>Quero ser um dos 20</span>
+        <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true">
+          <path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path>
+        </svg>
+      </a>
+    </div>
+  </section>
+
+  <Footer />
+</Layout>
+
+<script type="application/ld+json" set:html={JSON.stringify(faqSchema)} />
+
+<script>
+  // ── Reveal on scroll ──────────────────────────────────────────────────────
+  const prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const revealEls = document.querySelectorAll('.reveal');
+
+  if (prefersReduced) {
+    revealEls.forEach((el) => el.classList.add('visible'));
+  } else {
+    const revealObserver = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('visible');
+            revealObserver.unobserve(entry.target);
+          }
+        });
+      },
+      { threshold: 0.12, rootMargin: '0px 0px -40px 0px' }
+    );
+    revealEls.forEach((el) => revealObserver.observe(el));
+  }
+
+  // ── Calculadora ───────────────────────────────────────────────────────────
+  const hoursInput = document.getElementById('mb-calc-hours') as HTMLInputElement | null;
+  const ridesInput = document.getElementById('mb-calc-rides') as HTMLInputElement | null;
+  const fareInput = document.getElementById('mb-calc-fare') as HTMLInputElement | null;
+  const hoursValue = document.getElementById('mb-calc-hours-value');
+  const ridesValue = document.getElementById('mb-calc-rides-value');
+  const fareValue = document.getElementById('mb-calc-fare-value');
+  const hoursEcho = document.getElementById('mb-calc-hours-echo');
+  const ridesEcho = document.getElementById('mb-calc-rides-echo');
+  const fareEcho = document.getElementById('mb-calc-fare-echo');
+  const result = document.getElementById('mb-calc-result');
+
+  function setFill(input: HTMLInputElement) {
+    const min = Number(input.min);
+    const max = Number(input.max);
+    const pct = ((Number(input.value) - min) / (max - min)) * 100;
+    input.style.setProperty('--fill', `${pct}%`);
+  }
+
+  function updateCalc() {
+    if (
+      !hoursInput || !ridesInput || !fareInput ||
+      !hoursValue || !ridesValue || !fareValue ||
+      !hoursEcho || !ridesEcho || !fareEcho || !result
+    ) return;
+
+    const hours = Number(hoursInput.value);
+    const rides = Number(ridesInput.value);
+    const fare = Number(fareInput.value);
+    const total = hours * rides * fare;
+
+    setFill(hoursInput);
+    setFill(ridesInput);
+    setFill(fareInput);
+
+    hoursValue.textContent = `${hours}h`;
+    ridesValue.textContent = `${rides}`;
+    fareValue.textContent = `R$${fare}`;
+    hoursEcho.textContent = `${hours}h`;
+    ridesEcho.textContent = `${rides}`;
+    fareEcho.textContent = `R$${fare}`;
+    result.textContent = total.toLocaleString('pt-BR');
+  }
+
+  hoursInput?.addEventListener('input', updateCalc);
+  ridesInput?.addEventListener('input', updateCalc);
+  fareInput?.addEventListener('input', updateCalc);
+  updateCalc();
+
+  // ── FAQ accordion ─────────────────────────────────────────────────────────
+  document.querySelectorAll('.mb-faq__item').forEach((item) => {
+    const details = item as HTMLDetailsElement;
+    const summary = details.querySelector('summary');
+    const answer = details.querySelector<HTMLElement>('.mb-faq__answer');
+    if (!summary || !answer) return;
+
+    summary.addEventListener('click', (e) => {
+      e.preventDefault();
+      if (prefersReduced) {
+        details.open = !details.open;
+        return;
+      }
+      if (details.classList.contains('animating')) return;
+      details.open ? collapse() : expand();
+    });
+
+    function settle() {
+      answer!.style.height = '';
+      answer!.style.overflow = '';
+      answer!.style.transition = '';
+      details.classList.remove('animating');
+    }
+
+    function expand() {
+      details.classList.add('animating');
+      details.open = true;
+      const target = answer!.scrollHeight;
+      answer!.style.overflow = 'hidden';
+      answer!.style.height = '0px';
+      answer!.offsetHeight;
+      answer!.style.transition = 'height 0.35s cubic-bezier(0.16, 1, 0.3, 1)';
+      answer!.style.height = `${target}px`;
+
+      answer.addEventListener('transitionend', function onEnd() {
+        settle();
+        answer!.removeEventListener('transitionend', onEnd);
+      }, { once: true });
+    }
+
+    function collapse() {
+      details.classList.add('animating');
+      const start = answer!.scrollHeight;
+      answer!.style.overflow = 'hidden';
+      answer!.style.height = `${start}px`;
+      answer!.offsetHeight;
+      answer!.style.transition = 'height 0.3s cubic-bezier(0.16, 1, 0.3, 1)';
+      answer!.style.height = '0px';
+
+      answer.addEventListener('transitionend', function onEnd() {
+        details.open = false;
+        settle();
+        answer!.removeEventListener('transitionend', onEnd);
+      }, { once: true });
+    }
+  });
+</script>
+
+<style>
+  /* ── Hero ──────────────────────────────────────────────────────────────── */
+  .mb-hero {
+    padding: calc(var(--section-pad-y) + 3rem) var(--section-pad-x) var(--section-pad-y);
+  }
+
+  .mb-hero__container {
+    max-width: var(--container-max);
+    margin: 0 auto;
+    text-align: center;
+  }
+
+  .mb-hero__title {
+    font-size: clamp(2.25rem, 6vw, 3.75rem);
+    font-weight: 900;
+    font-family: var(--font-display);
+    line-height: 1.05;
+    letter-spacing: -0.02em;
+    margin-bottom: 1.25rem;
+  }
+
+  .mb-hero__sub {
+    font-size: 1.0625rem;
+    color: var(--muted);
+    max-width: 560px;
+    margin: 0 auto 2rem;
+    line-height: 1.7;
+  }
+
+  .mb-hero__chips {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 0.625rem;
+    margin-top: 2rem;
+  }
+
+  .mb-chip {
+    font-size: 0.8125rem;
+    color: var(--muted);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-sm);
+    padding: 0.5rem 0.875rem;
+  }
+
+  .mb-chip--accent {
+    color: var(--accent);
+    border-color: var(--border-solid);
+    background: rgba(244, 194, 13, 0.06);
+    font-weight: 600;
+  }
+
+  /* ── Banner de vagas ──────────────────────────────────────────────────── */
+  .mb-slots {
+    padding: 0 var(--section-pad-x) var(--section-pad-y);
+  }
+
+  .mb-slots__inner {
+    max-width: var(--container-max);
+    margin: 0 auto;
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    flex-wrap: wrap;
+    background: var(--surface);
+    border: 1px solid var(--border-solid);
+    border-radius: var(--radius-md);
+    padding: 1.25rem 1.5rem;
+  }
+
+  .mb-slots__icon {
+    flex-shrink: 0;
+    color: var(--accent);
+  }
+
+  .mb-slots__text {
+    flex: 1;
+    min-width: 200px;
+    font-size: 0.9375rem;
+    color: var(--muted);
+    line-height: 1.5;
+  }
+
+  .mb-slots__text strong {
+    color: var(--text);
+  }
+
+  .mb-slots__cta {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-size: 0.875rem;
+    font-weight: 600;
+    color: var(--accent);
+    white-space: nowrap;
+    transition: gap 0.2s ease;
+  }
+
+  .mb-slots__cta:hover {
+    gap: 0.75rem;
+  }
+
+  /* ── Benefícios ────────────────────────────────────────────────────────── */
+  .mb-benefits {
+    padding: var(--section-pad-y) var(--section-pad-x);
+  }
+
+  .mb-benefits__container {
+    max-width: 1100px;
+    margin: 0 auto;
+  }
+
+  .mb-benefits__header {
+    text-align: center;
+    margin-bottom: 3rem;
+  }
+
+  .mb-benefits__grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1.25rem;
+  }
+
+  .mb-card {
+    background: linear-gradient(145deg, rgba(242, 240, 234, 0.04) 0%, rgba(242, 240, 234, 0.01) 100%);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-md);
+    padding: 1.75rem 1.5rem;
+    position: relative;
+    overflow: hidden;
+    transition: transform 0.3s var(--ease-out-expo), border-color 0.3s ease, box-shadow 0.3s ease;
+  }
+
+  .mb-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 2px;
+    background: linear-gradient(90deg, var(--accent), transparent 80%);
+    transform: scaleX(0);
+    transform-origin: left;
+    transition: transform 0.5s var(--ease-out-expo);
+  }
+
+  .mb-card:hover {
+    transform: translateY(-4px);
+    border-color: rgba(244, 194, 13, 0.3);
+    box-shadow: 0 15px 35px -15px rgba(0, 0, 0, 0.5);
+  }
+
+  .mb-card:hover::before {
+    transform: scaleX(1);
+  }
+
+  .mb-card__icon {
+    width: 40px;
+    height: 40px;
+    border-radius: var(--radius-md);
+    background: rgba(244, 194, 13, 0.08);
+    color: var(--accent);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 1.25rem;
+  }
+
+  .mb-card__title {
+    font-size: 1.0625rem;
+    font-family: var(--font-body);
+    font-weight: 600;
+    color: var(--text);
+    margin-bottom: 0.5rem;
+  }
+
+  .mb-card__detail {
+    font-size: 0.875rem;
+    color: var(--muted);
+    line-height: 1.6;
+  }
+
+  /* ── Calculadora ───────────────────────────────────────────────────────── */
+  .mb-calc {
+    padding: var(--section-pad-y) var(--section-pad-x);
+  }
+
+  .mb-calc__container {
+    max-width: 640px;
+    margin: 0 auto;
+  }
+
+  .mb-calc__header {
+    text-align: center;
+    margin-bottom: 2.5rem;
+  }
+
+  .mb-panel {
+    background: var(--surface);
+    border: 1px solid var(--border-solid);
+    border-radius: var(--radius-md);
+    position: relative;
+    overflow: hidden;
+    box-shadow: 0 16px 48px rgba(0, 0, 0, 0.35);
+  }
+
+  .mb-panel::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 2px;
+    background: var(--accent);
+  }
+
+  .mb-panel__header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0.875rem 1.75rem;
+    border-bottom: 1px solid var(--border);
+  }
+
+  .mb-panel__label {
+    font-size: 0.75rem;
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+    color: var(--muted);
+  }
+
+  .mb-panel__status {
+    font-size: 0.6875rem;
+    color: #4ade80;
+    letter-spacing: 0.08em;
+  }
+
+  .mb-panel__body {
+    padding: 1.75rem 1.75rem 0.5rem;
+  }
+
+  .calc__row {
+    margin-bottom: 1.25rem;
+  }
+
+  .calc__row-top {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 0.625rem;
+  }
+
+  .calc__row-top label {
+    font-size: 0.8125rem;
+    color: var(--muted);
+  }
+
+  .calc__row-value {
+    font-size: 0.8125rem;
+    color: var(--accent);
+    background: rgba(244, 194, 13, 0.08);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-sm);
+    padding: 0.2rem 0.625rem;
+    min-width: 2.75rem;
+    text-align: center;
+  }
+
+  input[type='range'] {
+    --fill: 50%;
+    -webkit-appearance: none;
+    appearance: none;
+    width: 100%;
+    height: 20px;
+    background: transparent;
+    cursor: pointer;
+    display: block;
+  }
+
+  input[type='range']::-webkit-slider-runnable-track {
+    height: 4px;
+    border-radius: 2px;
+    background: linear-gradient(90deg, var(--accent) var(--fill), var(--surface-2) var(--fill));
+  }
+
+  input[type='range']::-moz-range-track {
+    height: 4px;
+    border-radius: 2px;
+    background: var(--surface-2);
+  }
+
+  input[type='range']::-moz-range-progress {
+    height: 4px;
+    border-radius: 2px;
+    background: var(--accent);
+  }
+
+  input[type='range']::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    appearance: none;
+    width: 18px;
+    height: 18px;
+    margin-top: -7px;
+    border-radius: 50%;
+    background: var(--accent);
+    border: 3px solid var(--bg);
+    box-shadow: 0 0 0 1px var(--border-solid), 0 0 12px rgba(244, 194, 13, 0.35);
+    transition: box-shadow 0.2s ease, transform 0.15s var(--ease-spring);
+  }
+
+  input[type='range']::-moz-range-thumb {
+    width: 18px;
+    height: 18px;
+    border-radius: 50%;
+    background: var(--accent);
+    border: 3px solid var(--bg);
+    box-shadow: 0 0 0 1px var(--border-solid), 0 0 12px rgba(244, 194, 13, 0.35);
+    transition: box-shadow 0.2s ease, transform 0.15s var(--ease-spring);
+  }
+
+  input[type='range']:hover::-webkit-slider-thumb,
+  input[type='range']:active::-webkit-slider-thumb {
+    transform: scale(1.15);
+    box-shadow: 0 0 0 1px var(--border-solid), 0 0 20px rgba(244, 194, 13, 0.55);
+  }
+
+  input[type='range']:hover::-moz-range-thumb,
+  input[type='range']:active::-moz-range-thumb {
+    transform: scale(1.15);
+    box-shadow: 0 0 0 1px var(--border-solid), 0 0 20px rgba(244, 194, 13, 0.55);
+  }
+
+  input[type='range']:focus-visible {
+    outline: 2px solid var(--accent);
+    outline-offset: 4px;
+    border-radius: 2px;
+  }
+
+  .calc__formula {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.75rem;
+    font-size: 0.875rem;
+    color: var(--text);
+    padding: 0.625rem 1rem;
+    background: var(--bg);
+    border: 1px dashed var(--border-solid);
+    border-radius: var(--radius-sm);
+    margin: 1.25rem 0;
+  }
+
+  .calc__formula-op {
+    color: var(--accent);
+    font-size: 0.75rem;
+  }
+
+  .calc__result {
+    text-align: center;
+    padding-bottom: 1.75rem;
+  }
+
+  .calc__result-label {
+    font-size: 0.75rem;
+    color: var(--muted);
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+    margin-bottom: 0.5rem;
+  }
+
+  .calc__result-value {
+    display: flex;
+    align-items: flex-start;
+    justify-content: center;
+    line-height: 1;
+  }
+
+  .calc__result-currency {
+    font-size: 1.5rem;
+    color: var(--accent);
+    opacity: 0.6;
+    margin-top: 0.625rem;
+    margin-right: 0.25rem;
+  }
+
+  #mb-calc-result {
+    font-size: clamp(2.75rem, 8vw, 4rem);
+    color: var(--accent);
+    line-height: 1;
+    text-shadow: 0 0 32px rgba(244, 194, 13, 0.25);
+  }
+
+  .calc__result-sub {
+    font-size: 0.875rem;
+    color: var(--muted);
+    margin-top: 0.5rem;
+  }
+
+  /* ── Como funciona ─────────────────────────────────────────────────────── */
+  .mb-steps {
+    padding: var(--section-pad-y) var(--section-pad-x);
+  }
+
+  .mb-steps__container {
+    max-width: var(--container-max);
+    margin: 0 auto;
+  }
+
+  .mb-steps__header {
+    text-align: center;
+    margin-bottom: 3rem;
+  }
+
+  .mb-steps__grid {
+    display: flex;
+    gap: 1.5rem;
+    margin-bottom: 3rem;
+  }
+
+  .mb-step {
+    flex: 1;
+    min-width: 0;
+    position: relative;
+    background: var(--bg);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-md);
+    padding: 1.5rem 1.375rem;
+  }
+
+  .mb-step__number {
+    display: block;
+    font-size: 0.8125rem;
+    color: var(--muted);
+    opacity: 0.5;
+    margin-bottom: 0.75rem;
+  }
+
+  .mb-step__title {
+    font-size: 1rem;
+    font-weight: 600;
+    color: var(--text);
+    margin-bottom: 0.375rem;
+  }
+
+  .mb-step__detail {
+    font-size: 0.8125rem;
+    color: var(--muted);
+    line-height: 1.5;
+  }
+
+  .mb-step__connector {
+    position: absolute;
+    top: 50%;
+    right: 0;
+    transform: translate(50%, -50%);
+    width: 24px;
+    height: 24px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    color: var(--accent);
+    z-index: 2;
+  }
+
+  .mb-requirements {
+    background: var(--bg);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-md);
+    padding: 1.5rem 1.75rem;
+    max-width: 480px;
+    margin: 0 auto;
+  }
+
+  .mb-requirements__title {
+    font-size: 0.8125rem;
+    color: var(--muted);
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    margin-bottom: 1rem;
+  }
+
+  .mb-requirements__list {
+    list-style: none;
+    display: grid;
+    gap: 0.75rem;
+  }
+
+  .mb-requirements__list li {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    font-size: 0.9375rem;
+    color: var(--text);
+  }
+
+  .mb-requirements__list svg {
+    flex-shrink: 0;
+    color: var(--accent);
+  }
+
+  /* ── FAQ ───────────────────────────────────────────────────────────────── */
+  .mb-faq {
+    padding: var(--section-pad-y) var(--section-pad-x);
+  }
+
+  .mb-faq__container {
+    max-width: var(--container-max);
+    margin: 0 auto;
+  }
+
+  .mb-faq__header {
+    margin-bottom: 3rem;
+  }
+
+  .mb-faq__list {
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+  }
+
+  .mb-faq__item {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-md);
+    overflow: hidden;
+    transition: border-color 0.25s ease;
+  }
+
+  .mb-faq__item:hover,
+  .mb-faq__item[open] {
+    border-color: rgba(244, 194, 13, 0.3);
+  }
+
+  .mb-faq__question {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    padding: 1.25rem 1.5rem;
+    cursor: pointer;
+    font-weight: 600;
+    font-size: 1rem;
+    color: var(--text);
+    list-style: none;
+    user-select: none;
+  }
+
+  .mb-faq__question::-webkit-details-marker {
+    display: none;
+  }
+
+  .mb-faq__question:focus-visible {
+    outline: 2px solid var(--accent);
+    outline-offset: -2px;
+  }
+
+  .mb-faq__q-text {
+    flex: 1;
+  }
+
+  .mb-faq__icon {
+    width: 28px;
+    height: 28px;
+    border-radius: 50%;
+    border: 1px solid var(--border);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--accent);
+    flex-shrink: 0;
+    transition: transform 0.3s var(--ease-out-expo), background 0.25s ease;
+  }
+
+  .mb-faq__item[open] .mb-faq__icon {
+    transform: rotate(45deg);
+    background: rgba(244, 194, 13, 0.1);
+  }
+
+  .mb-faq__answer-text {
+    padding: 0 1.5rem 1.375rem;
+    font-size: 0.9375rem;
+    color: var(--muted);
+    line-height: 1.7;
+  }
+
+  /* ── CTA final ─────────────────────────────────────────────────────────── */
+  .mb-final {
+    padding: var(--section-pad-y) var(--section-pad-x);
+    text-align: center;
+  }
+
+  .mb-final__container {
+    max-width: 560px;
+    margin: 0 auto;
+  }
+
+  .mb-final__sub {
+    font-size: 1.0625rem;
+    color: var(--muted);
+    margin: 1.25rem 0 2rem;
+    line-height: 1.6;
+  }
+
+  @media (max-width: 860px) {
+    .mb-benefits__grid {
+      grid-template-columns: 1fr 1fr;
+    }
+
+    .mb-steps__grid {
+      flex-direction: column;
+    }
+
+    .mb-step__connector {
+      top: auto;
+      right: auto;
+      bottom: 0;
+      left: 50%;
+      transform: translate(-50%, 50%) rotate(90deg);
+    }
+  }
+
+  @media (max-width: 560px) {
+    .mb-benefits__grid {
+      grid-template-columns: 1fr;
+    }
+
+    .mb-slots__inner {
+      flex-direction: column;
+      align-items: flex-start;
+      text-align: left;
+    }
+  }
+</style>

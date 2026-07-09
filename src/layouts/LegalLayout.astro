@@ -1,0 +1,87 @@
+---
+import Layout from './Layout.astro';
+import Footer from '../components/Footer.astro';
+
+interface Props {
+  title: string;
+  description: string;
+  updated: string;
+}
+
+const { title, description, updated } = Astro.props;
+---
+
+<Layout title={`${title} — Vai de ABS`} description={description}>
+  <main class="legal">
+    <div class="legal__container">
+      <p class="eyebrow">Documento</p>
+      <h1 class="legal__title">{title}</h1>
+      <p class="legal__updated mono">Última atualização: {updated}</p>
+      <div class="legal__content">
+        <slot />
+      </div>
+      <a href="/" class="btn btn--secondary legal__back">← Voltar ao início</a>
+    </div>
+  </main>
+  <Footer />
+</Layout>
+
+<style>
+  .legal {
+    padding: calc(var(--section-pad-y) + 3rem) var(--section-pad-x) var(--section-pad-y);
+  }
+
+  .legal__container {
+    max-width: 720px;
+    margin: 0 auto;
+  }
+
+  .legal__title {
+    font-size: clamp(2rem, 6vw, 3rem);
+    font-weight: 900;
+    margin-bottom: 0.75rem;
+  }
+
+  .legal__updated {
+    font-size: 0.75rem;
+    color: var(--muted);
+    margin-bottom: 3rem;
+  }
+
+  .legal__content :global(h2) {
+    font-size: 1.25rem;
+    margin-top: 2.5rem;
+    margin-bottom: 0.875rem;
+    color: var(--text);
+  }
+
+  .legal__content :global(p),
+  .legal__content :global(li) {
+    font-size: 0.9375rem;
+    color: var(--muted);
+    line-height: 1.75;
+    margin-bottom: 1rem;
+  }
+
+  .legal__content :global(ul) {
+    padding-left: 1.25rem;
+    margin-bottom: 1rem;
+  }
+
+  .legal__content :global(li) {
+    margin-bottom: 0.5rem;
+  }
+
+  .legal__content :global(strong) {
+    color: var(--text);
+  }
+
+  .legal__content :global(a) {
+    color: var(--accent);
+    border-bottom: 1px solid rgba(244, 194, 13, 0.35);
+  }
+
+  .legal__back {
+    margin-top: 3rem;
+  }
+</style>

@@ -1,0 +1,5 @@
+User-agent: *
+Allow: /
+
+# TODO: trocar pelo domínio real quando o site for publicado
+Sitemap: https://vaideabs.com.br/sitemap.xml

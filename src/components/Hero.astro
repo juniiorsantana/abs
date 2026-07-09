@@ -1,49 +1,140 @@
 ---
+
 ---
 
 <section class="hero" id="hero" aria-label="Seção principal">
-  <!-- Background elements -->
+  <!-- Background image + readability overlay -->
   <div class="hero__bg" aria-hidden="true">
-    <div class="hero__bg-line hero__bg-line--1"></div>
-    <div class="hero__bg-line hero__bg-line--2"></div>
-    <div class="hero__bg-grid"></div>
+    <div class="hero__bg-image"></div>
+    <div class="hero__bg-overlay"></div>
   </div>
 
   <div class="hero__container">
-    <!-- Tag line above title -->
-    <p class="hero__eyebrow reveal delay-1">Cáceres · MT · Moto táxi via app</p>
+    <div class="hero__copy">
+      <p class="hero__eyebrow reveal delay-1">Cáceres · MT · Motos via app</p>
 
-    <h1 class="hero__title reveal delay-2">
-      Vai de ABS<span class="hero__dot">.</span>
-    </h1>
+      <h1 class="hero__title reveal delay-2">
+        Vai de ABS<span class="hero__dot">.</span>
+      </h1>
 
-    <p class="hero__sub reveal delay-3">
-      A forma mais moderna de se mover em Cáceres.<br />
-      Você vê o preço antes de confirmar, acompanha a moto chegando<br class="br-desktop" />
-      e paga sem precisar ter dinheiro na mão.
-    </p>
+      <p class="hero__sub reveal delay-3">
+        A forma mais moderna de se mover em Cáceres. Você vê o preço antes de
+        confirmar, acompanha a moto chegando até o destino
+      </p>
 
-    <div class="hero__buttons reveal delay-4">
-      <a href="#precos" class="btn btn--primary" id="cta-pedir-corrida">
-        <span>Pedir uma corrida</span>
-        <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true">
-          <path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-        </svg>
-      </a>
-      <a href="#motoboy" class="btn btn--secondary" id="cta-ser-motoboy">Quero ser motoboy ABS</a>
+      <div class="hero__buttons reveal delay-4">
+        <button type="button" class="btn btn--primary" id="cta-pedir-corrida" data-open-app-modal>
+          <span>Pedir uma corrida</span>
+          <svg
+            width="16"
+            height="16"
+            viewBox="0 0 16 16"
+            fill="none"
+            aria-hidden="true"
+          >
+            <path
+              d="M3 8h10M9 4l4 4-4 4"
+              stroke="currentColor"
+              stroke-width="1.5"
+              stroke-linecap="round"
+              stroke-linejoin="round"></path>
+          </svg>
+        </button>
+        <a href="/seja-motoboy" class="btn btn--secondary" id="cta-ser-motoboy"
+          >Quero ser motoboy ABS</a
+        >
+      </div>
+
+      <div class="hero__stores reveal" style="transition-delay: 0.45s">
+        <a
+          href="https://apps.apple.com/br/app/abs-pro/id6754334766"
+          class="store-btn store-btn--light"
+          aria-label="Baixar na App Store"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          <svg
+            class="store-btn__icon"
+            viewBox="0 0 384 512"
+            fill="currentColor"
+            aria-hidden="true"
+          >
+            <path
+              d="M318.7 268.7c-.2-36.7 16.4-64.4 50-84.8-18.8-26.9-47.2-41.7-84.7-44.6-35.5-2.8-74.3 20.7-88.5 20.7-15 0-49.4-19.7-76.4-19.7C63.3 141.2 4 184.8 4 273.5q0 39.3 14.4 81.2c12.8 36.7 59 126.7 107.2 125.2 25.2-.6 43-17.9 75.8-17.9 31.8 0 48.3 17.9 76.4 17.9 48.6-.7 90.4-82.5 102.6-119.3-65.2-30.7-61.7-90-61.7-91.9zm-56.6-164.2c27.3-32.4 24.8-61.9 24-72.5-24.1 1.4-52 16.4-67.9 34.9-17.5 19.8-27.8 44.3-25.6 71.9 26.1 2 49.9-11.4 69.5-34.3z"
+            ></path>
+          </svg>
+          <span class="store-btn__text"><em>Baixar na</em>App Store</span>
+        </a>
+        <a
+          href="https://play.google.com/store/apps/details?id=br.com.devbase.abspro"
+          class="store-btn store-btn--dark"
+          aria-label="Baixar no Google Play"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          <svg
+            class="store-btn__icon"
+            viewBox="0 0 512 512"
+            fill="currentColor"
+            aria-hidden="true"
+          >
+            <path
+              d="M325.3 234.3L104.6 13l280.8 161.2-60.1 60.1zM47 0C34 6.8 25.3 19.2 25.3 35.3v441.3c0 16.1 8.7 28.5 21.7 35.3l256.6-256L47 0zm425.2 225.6l-58.9-34.1-65.7 64.5 65.7 64.5 60.1-34.1c18-14.3 18-46.5-1.2-60.8zM104.6 499l280.8-161.2-60.1-60.1L104.6 499z"
+            ></path>
+          </svg>
+          <span class="store-btn__text"><em>Disponível no</em>Google Play</span>
+        </a>
+      </div>
+
+      <p class="hero__tagline reveal delay-5">
+        <span class="hero__tagline-line" aria-hidden="true"></span>
+        De Cáceres, pra Cáceres.
+        <span class="hero__taglisne-line" aria-hidden="true"></span>
+      </p>
     </div>
 
-    <p class="hero__tagline reveal delay-5">
-      <span class="hero__tagline-line" aria-hidden="true"></span>
-      Feito em Cáceres, pra Cáceres.
-      <span class="hero__tagline-line" aria-hidden="true"></span>
-    </p>
+    <!-- App mockup -->
+    <div
+      class="hero__visual reveal delay-4"
+      aria-hidden="true"
+      id="hero-visual"
+    >
+      <div class="hero__mockup-card" id="hero-mockup-card">
+        <div class="hero__mockup-sheen" id="hero-mockup-sheen"></div>
+        <img
+          src="/celular-hero.avif"
+          alt=""
+          class="hero__phone-img"
+          width="535"
+          height="802"
+          loading="eager"
+          decoding="async"
+        />
+        <div class="phone__glow"></div>
+
+        <div class="hero__badge hero__badge--top">
+          <span class="hero__badge-icon">🛵</span>
+          <div class="hero__badge-copy">
+            <p class="hero__badge-title">Motoboys daqui</p>
+            <p class="hero__badge-sub">Cadastrados e identificados</p>
+          </div>
+        </div>
+
+        <div class="hero__badge hero__badge--bottom">
+          <span class="hero__badge-icon">🔒</span>
+          <div class="hero__badge-copy">
+            <p class="hero__badge-title">Pagamento digital</p>
+            <p class="hero__badge-sub">Sem dinheiro na mão</p>
+          </div>
+        </div>
+      </div>
+    </div>
   </div>
 
   <!-- Stats bar -->
   <div class="hero__stats reveal delay-6" aria-label="Diferenciais">
     <div class="hero__stat">
-      <span class="hero__stat-value mono">R$10</span>
+      <span class="hero__stat-value mono">R$8</span>
       <span class="hero__stat-label">piso por corrida</span>
     </div>
     <div class="hero__stat-divider" aria-hidden="true"></div>
@@ -59,83 +150,93 @@
   </div>
 </section>
 
+<script>
+  // Tilt 3D do card do celular seguindo o cursor + reflexo de luz (sheen).
+  const prefersReduced = window.matchMedia(
+    "(prefers-reduced-motion: reduce)",
+  ).matches;
+  const canHover = window.matchMedia("(hover: hover)").matches;
+
+  const visual = document.getElementById("hero-visual");
+  const card = document.getElementById("hero-mockup-card");
+  const sheen = document.getElementById("hero-mockup-sheen");
+
+  if (visual && card && !prefersReduced && canHover) {
+    visual.addEventListener("mousemove", (e) => {
+      const rect = visual.getBoundingClientRect();
+      const px = (e.clientX - rect.left) / rect.width;
+      const py = (e.clientY - rect.top) / rect.height;
+      const rx = (py - 0.5) * -14;
+      const ry = (px - 0.5) * 14;
+
+      card.style.transform = `rotateX(${rx}deg) rotateY(${ry}deg)`;
+      if (sheen) {
+        sheen.style.setProperty("--mx", `${px * 100}%`);
+        sheen.style.setProperty("--my", `${py * 100}%`);
+      }
+    });
+
+    visual.addEventListener("mouseleave", () => {
+      card.style.transform = "rotateX(0deg) rotateY(0deg)";
+    });
+  }
+</script>
+
 <style>
   .hero {
-    min-height: 100svh;
+    min-height: 85svh;
     display: flex;
     flex-direction: column;
     align-items: center;
     text-align: center;
-    padding: var(--section-pad-y) var(--section-pad-x) 0;
+    padding: 6.5rem var(--section-pad-x) 0;
     position: relative;
     overflow: hidden;
   }
 
-  /* Background design elements */
+  /* Background */
   .hero__bg {
     position: absolute;
     inset: 0;
     pointer-events: none;
   }
 
-  .hero__bg-grid {
+  .hero__bg-image {
     position: absolute;
     inset: 0;
-    background-image:
-      linear-gradient(rgba(244, 194, 13, 0.03) 1px, transparent 1px),
-      linear-gradient(90deg, rgba(244, 194, 13, 0.03) 1px, transparent 1px);
-    background-size: 60px 60px;
-    mask-image: radial-gradient(ellipse at center, black 30%, transparent 80%);
+    background: url("/bghero.jpg") center / cover no-repeat;
   }
 
-  .hero__bg-line {
+  /* Leve escurecida só nas bordas pra navbar e stats não sumirem */
+  .hero__bg-overlay {
     position: absolute;
-    height: 1px;
-    background: linear-gradient(90deg, transparent, var(--accent), transparent);
-    opacity: 0.15;
-  }
-
-  .hero__bg-line--1 {
-    width: 60%;
-    top: 35%;
-    left: 20%;
-    animation: slide-line 4s ease-in-out infinite alternate;
-  }
-
-  .hero__bg-line--2 {
-    width: 40%;
-    bottom: 30%;
-    left: 30%;
-    animation: slide-line 6s ease-in-out infinite alternate-reverse;
-    opacity: 0.08;
-  }
-
-  @keyframes slide-line {
-    from { transform: scaleX(0.7); opacity: 0.08; }
-    to { transform: scaleX(1); opacity: 0.18; }
+    inset: 0;
+    background: linear-gradient(
+      to bottom,
+      rgba(11, 11, 12, 0.25) 0%,
+      transparent 18%,
+      transparent 80%,
+      rgba(11, 11, 12, 0.35) 100%
+    );
   }
 
   /* Content */
   .hero__container {
-    max-width: var(--container-max);
+    max-width: 1100px;
     width: 100%;
     position: relative;
     z-index: 1;
     margin-block: auto;
-    padding-bottom: 2rem;
+    padding-bottom: 3rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 3.5rem;
   }
 
-  .hero__container::before {
-    content: '';
-    position: absolute;
-    width: 600px;
-    height: 400px;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    background: radial-gradient(ellipse, rgba(244, 194, 13, 0.06) 0%, transparent 70%);
-    pointer-events: none;
-    z-index: -1;
+  .hero__copy {
+    max-width: 620px;
+    position: relative;
   }
 
   .hero__eyebrow {
@@ -153,7 +254,7 @@
 
   .hero__eyebrow::before,
   .hero__eyebrow::after {
-    content: '';
+    content: "";
     display: block;
     width: 2rem;
     height: 1px;
@@ -162,11 +263,12 @@
   }
 
   .hero__title {
-    font-size: clamp(3.5rem, 13vw, 8rem);
+    font-size: clamp(3.25rem, 9vw, 6rem);
     font-weight: 900;
     letter-spacing: -0.04em;
     line-height: 0.95;
-    margin-bottom: 2rem;
+    margin-bottom: 1.75rem;
+    text-shadow: 0 2px 24px rgba(0, 0, 0, 0.5);
   }
 
   .hero__dot {
@@ -177,19 +279,13 @@
 
   .hero__sub {
     font-size: clamp(1rem, 2.5vw, 1.125rem);
-    color: var(--muted);
-    max-width: 600px;
+    color: var(--text);
+    opacity: 0.85;
+    max-width: 560px;
     margin-inline: auto;
-    margin-bottom: 2.5rem;
+    margin-bottom: 2.25rem;
     line-height: 1.7;
-  }
-
-  .br-desktop {
-    display: none;
-  }
-
-  @media (min-width: 640px) {
-    .br-desktop { display: block; }
+    text-shadow: 0 1px 12px rgba(0, 0, 0, 0.6);
   }
 
   /* Buttons */
@@ -198,21 +294,21 @@
     flex-wrap: wrap;
     gap: 1rem;
     justify-content: center;
-    margin-bottom: 2.5rem;
+    margin-bottom: 2.25rem;
   }
-
-  /* .btn classes are global — see Layout.astro */
 
   /* Tagline */
   .hero__tagline {
     font-size: 0.75rem;
-    color: var(--muted);
+    color: var(--text);
+    opacity: 0.7;
     letter-spacing: 0.1em;
     text-transform: uppercase;
     display: flex;
     align-items: center;
     justify-content: center;
     gap: 1rem;
+    text-shadow: 0 1px 8px rgba(0, 0, 0, 0.6);
   }
 
   .hero__tagline-line {
@@ -221,6 +317,295 @@
     height: 1px;
     background: var(--muted);
     opacity: 0.4;
+  }
+
+  /* ── Botões de loja ────────────────────────────────────────────────────── */
+
+  .hero__stores {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.75rem;
+    justify-content: center;
+    margin-bottom: 2.25rem;
+  }
+
+  .store-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.625rem;
+    padding: 0.5rem 1rem;
+    border-radius: var(--radius-md);
+    transition:
+      transform 0.3s var(--ease-spring),
+      box-shadow 0.3s ease;
+  }
+
+  .store-btn__icon {
+    width: 20px;
+    height: 20px;
+    flex-shrink: 0;
+  }
+
+  .store-btn__text {
+    display: flex;
+    flex-direction: column;
+    font-size: 0.8125rem;
+    font-weight: 700;
+    line-height: 1.15;
+    text-align: left;
+  }
+
+  .store-btn__text em {
+    font-style: normal;
+    font-size: 0.5625rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    opacity: 0.6;
+  }
+
+  .store-btn--light {
+    background: linear-gradient(180deg, #f2f0ea 0%, #dcdad3 100%);
+    color: #0b0b0c;
+    box-shadow:
+      0 1px 2px rgba(0, 0, 0, 0.15),
+      0 8px 20px -6px rgba(0, 0, 0, 0.35),
+      inset 0 1px 1px rgba(255, 255, 255, 0.6);
+  }
+
+  .store-btn--light:hover {
+    transform: translateY(-2px);
+    box-shadow:
+      0 2px 4px rgba(0, 0, 0, 0.2),
+      0 14px 28px -6px rgba(0, 0, 0, 0.45),
+      inset 0 1px 1px rgba(255, 255, 255, 0.6);
+  }
+
+  .store-btn--dark {
+    background: linear-gradient(180deg, var(--surface-2) 0%, var(--bg) 100%);
+    color: var(--text);
+    border: 1px solid var(--border);
+    box-shadow:
+      0 8px 20px -6px rgba(0, 0, 0, 0.5),
+      inset 0 1px 1px rgba(255, 255, 255, 0.06);
+  }
+
+  .store-btn--dark:hover {
+    transform: translateY(-2px);
+    border-color: var(--border-solid);
+    box-shadow:
+      0 14px 28px -6px rgba(0, 0, 0, 0.6),
+      inset 0 1px 1px rgba(255, 255, 255, 0.1);
+  }
+
+  @media (min-width: 920px) {
+    .hero__stores {
+      justify-content: flex-start;
+    }
+  }
+
+  /* ── App mockup ─────────────────────────────────────────────────────────── */
+
+  .hero__visual {
+    position: relative;
+    flex-shrink: 0;
+    perspective: 1200px;
+    animation: phone-float 7s ease-in-out infinite;
+  }
+
+  .hero__mockup-card {
+    position: relative;
+    transform-style: preserve-3d;
+    transition: transform 0.4s var(--ease-out-expo);
+    will-change: transform;
+  }
+
+  /* Reflexo de luz que segue o cursor sobre o card */
+  .hero__mockup-sheen {
+    position: absolute;
+    inset: -20%;
+    border-radius: 50%;
+    background: radial-gradient(
+      280px circle at var(--mx, 50%) var(--my, 50%),
+      rgba(255, 255, 255, 0.12),
+      transparent 60%
+    );
+    mix-blend-mode: screen;
+    pointer-events: none;
+    z-index: 2;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+  }
+
+  .hero__visual:hover .hero__mockup-sheen {
+    opacity: 1;
+  }
+
+  /* Badges de vidro flutuantes */
+  .hero__badge {
+    position: absolute;
+    display: flex;
+    align-items: center;
+    gap: 0.625rem;
+    padding: 0.7rem 0.9rem;
+    max-width: 172px;
+    border-radius: var(--radius-md);
+    background: linear-gradient(
+      135deg,
+      rgba(242, 240, 234, 0.09) 0%,
+      rgba(242, 240, 234, 0.02) 100%
+    );
+    border: 1px solid rgba(242, 240, 234, 0.12);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    box-shadow:
+      0 20px 40px -14px rgba(0, 0, 0, 0.6),
+      inset 0 1px 1px rgba(255, 255, 255, 0.15);
+    z-index: 3;
+    transform: translateZ(30px);
+  }
+
+  .hero__badge--top {
+    top: 10%;
+    left: -14%;
+  }
+
+  .hero__badge--bottom {
+    bottom: 16%;
+    right: -16%;
+  }
+
+  .hero__badge-icon {
+    font-size: 1.15rem;
+    flex-shrink: 0;
+    line-height: 1;
+  }
+
+  .hero__badge-title {
+    font-size: 0.75rem;
+    font-weight: 700;
+    color: var(--text);
+    line-height: 1.3;
+  }
+
+  .hero__badge-sub {
+    font-size: 0.65rem;
+    color: var(--muted);
+    line-height: 1.3;
+  }
+
+  @media (max-width: 919px) {
+    .hero__badge {
+      display: none;
+    }
+  }
+
+  /* Halo de luz sob o celular, casando com a plataforma do fundo */
+  .hero__visual::after {
+    content: "";
+    position: absolute;
+    left: 50%;
+    bottom: -48px;
+    transform: translateX(-50%);
+    width: 340px;
+    height: 90px;
+    border-radius: 50%;
+    background: radial-gradient(
+      ellipse,
+      rgba(244, 194, 13, 0.3),
+      transparent 70%
+    );
+    filter: blur(14px);
+    pointer-events: none;
+  }
+
+  .hero__phone-img {
+    width: 330px;
+    height: auto;
+    position: relative;
+    z-index: 1;
+    filter: drop-shadow(20px 32px 40px rgba(0, 0, 0, 0.55));
+  }
+
+  @keyframes phone-float {
+    0%,
+    100% {
+      transform: translateY(0);
+    }
+    50% {
+      transform: translateY(-10px);
+    }
+  }
+
+  .phone__glow {
+    position: absolute;
+    inset: -15%;
+    background: radial-gradient(
+      ellipse at center,
+      rgba(244, 194, 13, 0.09) 0%,
+      transparent 65%
+    );
+    pointer-events: none;
+    z-index: 0;
+  }
+
+  /* ── Desktop: two columns ──────────────────────────────────────────────── */
+
+  @media (min-width: 920px) {
+    .hero {
+      text-align: left;
+    }
+
+    .hero__container {
+      flex-direction: row;
+      align-items: center;
+      justify-content: space-between;
+      gap: 3rem;
+    }
+
+    .hero__copy {
+      max-width: 560px;
+    }
+
+    .hero__eyebrow {
+      justify-content: flex-start;
+    }
+
+    .hero__eyebrow::after {
+      display: none;
+    }
+
+    .hero__sub {
+      margin-inline: 0;
+    }
+
+    .hero__buttons {
+      justify-content: flex-start;
+    }
+
+    .hero__tagline {
+      justify-content: flex-start;
+    }
+
+    .hero__tagline-line:last-child {
+      display: none;
+    }
+
+    .hero__visual {
+      padding-right: clamp(1.5rem, 5vw, 4rem);
+    }
+  }
+
+  @media (max-width: 919px) {
+    .hero__phone-img {
+      width: 290px;
+    }
+  }
+
+  @media (min-width: 1200px) {
+    .hero__phone-img {
+      width: 380px;
+    }
   }
 
   /* Stats bar */

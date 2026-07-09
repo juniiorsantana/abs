@@ -2,8 +2,10 @@
 import Layout from '../layouts/Layout.astro';
 import Hero from '../components/Hero.astro';
 import HowItWorks from '../components/HowItWorks.astro';
+import Launch from '../components/Launch.astro';
 import BeDriver from '../components/BeDriver.astro';
 import Pricing from '../components/Pricing.astro';
+import Faq from '../components/Faq.astro';
 import About from '../components/About.astro';
 import Footer from '../components/Footer.astro';
 ---
@@ -11,8 +13,10 @@ import Footer from '../components/Footer.astro';
 <Layout>
   <Hero />
   <HowItWorks />
+  <Launch />
   <BeDriver />
   <Pricing />
+  <Faq />
   <About />
   <Footer />
 </Layout>
@@ -85,7 +89,7 @@ import Footer from '../components/Footer.astro';
             // Ease out cubic
             const eased = 1 - Math.pow(1 - progress, 3);
             current = Math.round(eased * target);
-            el.textContent = String(current);
+            el.textContent = current.toLocaleString('pt-BR');
             if (progress < 1) requestAnimationFrame(tick);
           }
 
@@ -100,7 +104,7 @@ import Footer from '../components/Footer.astro';
   } else {
     // No animation — just show the value
     counters.forEach((el) => {
-      el.textContent = el.dataset.counter!;
+      el.textContent = parseInt(el.dataset.counter!, 10).toLocaleString('pt-BR');
     });
   }
 
@@ -125,29 +129,6 @@ import Footer from '../components/Footer.astro';
         document.body.style.overflow = '';
       });
     });
-  }
-
-  // ─── Comparison bar animation (BeDriver) ─────────────────────────────────────
-  const barFill = document.querySelector<HTMLElement>('.driver__big-stat-bar-fill');
-  if (barFill && !prefersReduced) {
-    const tw = parseFloat(barFill.dataset.targetWidth || '90');
-    barFill.style.width = '0%';
-
-    const barObserver = new IntersectionObserver(
-      (entries) => {
-        entries.forEach((entry) => {
-          if (entry.isIntersecting) {
-            setTimeout(() => {
-              if (barFill) barFill.style.width = `${tw}%`;
-            }, 400);
-            barObserver.unobserve(entry.target);
-          }
-        });
-      },
-      { threshold: 0.5 }
-    );
-
-    if (barFill.parentElement) barObserver.observe(barFill.parentElement);
   }
 
   // ─── Consolidated scroll handler ─────────────────────────────────────────────

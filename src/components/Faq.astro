@@ -1,0 +1,273 @@
+---
+const faqs = [
+  {
+    q: 'É seguro andar de moto táxi pelo ABS?',
+    a: 'Sim. Todos os motoboys são cadastrados e identificados — antes da corrida você vê o nome, a moto e a avaliação de quem vai te buscar. A corrida inteira é rastreada em tempo real pelo app.',
+  },
+  {
+    q: 'Quanto custa uma corrida?',
+    a: 'O piso é R$ 8 e o valor exato aparece na tela antes de você confirmar. Nada de negociar ou descobrir o preço só no final.',
+  },
+  {
+    q: 'O preço pode mudar durante a corrida?',
+    a: 'Não. O valor que aparece na confirmação é travado — é exatamente o que você paga, sem cobrança extra por espera ou desvio.',
+  },
+  {
+    q: 'Como funciona o pagamento?',
+    a: 'O pagamento é digital, direto pelo app. Você não precisa ter dinheiro na mão nem se preocupar com troco.',
+  },
+  {
+    q: 'O ABS atende toda a cidade?',
+    a: 'Sim, atendemos toda a área urbana de Cáceres. É só pedir que o motoboy mais próximo aceita a corrida.',
+  },
+  {
+    q: 'Como faço para ser motoboy parceiro?',
+    a: 'Chame a gente no WhatsApp. O cadastro é simples: você precisa de moto regularizada, CNH ativa e os documentos básicos. Feito isso, é só começar a receber corridas — ficando com 90% de cada uma.',
+  },
+];
+
+const faqSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'FAQPage',
+  mainEntity: faqs.map((f) => ({
+    '@type': 'Question',
+    name: f.q,
+    acceptedAnswer: { '@type': 'Answer', text: f.a },
+  })),
+};
+---
+
+<section class="faq section--surface" id="duvidas" aria-labelledby="faq-title">
+  <div class="faq__container">
+    <div class="faq__header">
+      <p class="eyebrow reveal">Dúvidas frequentes</p>
+      <h2 class="section-title reveal delay-1" id="faq-title">
+        Perguntou,<br />respondemos.
+      </h2>
+    </div>
+
+    <div class="faq__list">
+      {faqs.map((f, i) => (
+        <details class="faq__item reveal" style={`transition-delay: ${(i + 1) * 0.08}s`}>
+          <summary class="faq__question">
+            <span class="faq__num mono" aria-hidden="true">{String(i + 1).padStart(2, '0')}</span>
+            <span class="faq__q-text">{f.q}</span>
+            <span class="faq__icon" aria-hidden="true">
+              <svg width="14" height="14" viewBox="0 0 14 14" fill="none">
+                <path d="M7 1v12M1 7h12" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+              </svg>
+            </span>
+          </summary>
+          <div class="faq__answer">
+            <p class="faq__answer-text">{f.a}</p>
+          </div>
+        </details>
+      ))}
+    </div>
+
+    <p class="faq__more reveal">
+      Ficou com outra dúvida?
+      <a href="https://wa.me/5565996164735" target="_blank" rel="noopener noreferrer">
+        Chama no WhatsApp
+      </a>
+    </p>
+  </div>
+</section>
+
+<script type="application/ld+json" set:html={JSON.stringify(faqSchema)} />
+
+<script>
+  // Anima abertura/fechamento do accordion — <details> nativo não tem easing.
+  const prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  document.querySelectorAll('.faq__item').forEach((item) => {
+    const details = item as HTMLDetailsElement;
+    const summary = details.querySelector('summary');
+    const answer = details.querySelector<HTMLElement>('.faq__answer');
+    if (!summary || !answer) return;
+
+    summary.addEventListener('click', (e) => {
+      e.preventDefault();
+      if (prefersReduced) {
+        details.open = !details.open;
+        return;
+      }
+      if (details.classList.contains('animating')) return;
+      details.open ? collapse() : expand();
+    });
+
+    function settle() {
+      answer!.style.height = '';
+      answer!.style.overflow = '';
+      answer!.style.transition = '';
+      details.classList.remove('animating');
+    }
+
+    function expand() {
+      details.classList.add('animating');
+      details.open = true;
+      const target = answer!.scrollHeight;
+      answer!.style.overflow = 'hidden';
+      answer!.style.height = '0px';
+      answer!.offsetHeight; // força reflow para o transition pegar o valor inicial
+      answer!.style.transition = 'height 0.35s cubic-bezier(0.16, 1, 0.3, 1)';
+      answer!.style.height = `${target}px`;
+
+      answer.addEventListener('transitionend', function onEnd() {
+        settle();
+        answer!.removeEventListener('transitionend', onEnd);
+      }, { once: true });
+    }
+
+    function collapse() {
+      details.classList.add('animating');
+      const start = answer!.scrollHeight;
+      answer!.style.overflow = 'hidden';
+      answer!.style.height = `${start}px`;
+      answer!.offsetHeight; // força reflow para o transition pegar o valor inicial
+      answer!.style.transition = 'height 0.3s cubic-bezier(0.16, 1, 0.3, 1)';
+      answer!.style.height = '0px';
+
+      answer.addEventListener('transitionend', function onEnd() {
+        details.open = false;
+        settle();
+        answer!.removeEventListener('transitionend', onEnd);
+      }, { once: true });
+    }
+  });
+</script>
+
+<style>
+  .faq {
+    padding: var(--section-pad-y) var(--section-pad-x);
+    position: relative;
+  }
+
+  .faq__container {
+    max-width: var(--container-max);
+    margin: 0 auto;
+    position: relative;
+    z-index: 2;
+  }
+
+  .faq__header {
+    margin-bottom: 3rem;
+  }
+
+  .faq__list {
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+    margin-bottom: 2.5rem;
+  }
+
+  .faq__item {
+    background: var(--bg);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-md);
+    overflow: hidden;
+    transition: border-color 0.25s ease;
+  }
+
+  .faq__item:hover,
+  .faq__item[open] {
+    border-color: rgba(244, 194, 13, 0.3);
+  }
+
+  .faq__question {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    padding: 1.25rem 1.5rem;
+    cursor: pointer;
+    font-weight: 600;
+    font-size: 1rem;
+    color: var(--text);
+    list-style: none;
+    user-select: none;
+  }
+
+  .faq__question::-webkit-details-marker {
+    display: none;
+  }
+
+  .faq__question:focus-visible {
+    outline: 2px solid var(--accent);
+    outline-offset: -2px;
+  }
+
+  .faq__num {
+    font-size: 0.75rem;
+    color: var(--accent);
+    opacity: 0.55;
+    flex-shrink: 0;
+    transition: opacity 0.25s ease;
+  }
+
+  .faq__item:hover .faq__num,
+  .faq__item[open] .faq__num {
+    opacity: 1;
+  }
+
+  .faq__q-text {
+    flex: 1;
+  }
+
+  .faq__icon {
+    width: 28px;
+    height: 28px;
+    border-radius: 50%;
+    border: 1px solid var(--border);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--accent);
+    flex-shrink: 0;
+    transition: transform 0.3s var(--ease-out-expo), background 0.25s ease;
+  }
+
+  .faq__item[open] .faq__icon {
+    transform: rotate(45deg);
+    background: rgba(244, 194, 13, 0.1);
+  }
+
+  /* Sem padding aqui de propósito — é este elemento que a JS anima até 0.
+     Padding em border-box nunca encolhe abaixo do próprio padding. */
+  .faq__answer {
+    max-width: 640px;
+  }
+
+  .faq__answer-text {
+    padding: 0 1.5rem 1.375rem;
+    font-size: 0.9375rem;
+    color: var(--muted);
+    line-height: 1.7;
+  }
+
+  .faq__more {
+    font-size: 0.9375rem;
+    color: var(--muted);
+  }
+
+  .faq__more a {
+    color: var(--accent);
+    font-weight: 600;
+    border-bottom: 1px solid rgba(244, 194, 13, 0.35);
+    transition: border-color 0.2s ease;
+  }
+
+  .faq__more a:hover {
+    border-bottom-color: var(--accent);
+  }
+
+  @media (max-width: 480px) {
+    .faq__question {
+      padding: 1rem 1.125rem;
+      font-size: 0.9375rem;
+    }
+
+    .faq__answer-text {
+      padding: 0 1.125rem 1.125rem;
+    }
+  }
+</style>

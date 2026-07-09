@@ -1,0 +1,382 @@
+---
+const promises = [
+  {
+    title: "Motoboys daqui",
+    detail:
+      "Gente de Cáceres, cadastrada e identificada no app. Você sabe quem vai te buscar.",
+    icon: "M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2 M12 11a4 4 0 1 0 0-8 4 4 0 0 0 0 8z",
+  },
+  {
+    title: "Sem surpresa desde o dia um",
+    detail:
+      "Preço na tela antes de confirmar, piso de R$ 8 e valor travado até o fim da corrida.",
+    icon: "M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z",
+  },
+  {
+    title: "Suporte de verdade",
+    detail:
+      "Falou no WhatsApp, a gente responde. Sem robô, sem fila de espera.",
+    icon: "M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z",
+  },
+];
+---
+
+<section class="launch" id="chegamos" aria-labelledby="launch-title">
+  <!-- Foto de Cáceres: nasce pequena no centro, cresce até cobrir a seção,
+       depois escurece levemente enquanto o conteúdo real aparece por cima -->
+  <div class="launch__photo-stage" id="launch-photo-stage" aria-hidden="true">
+    <div class="launch__photo-frame">
+      <div class="launch__photo-img"></div>
+    </div>
+    <div class="launch__photo-dark"></div>
+  </div>
+
+  <div class="launch__bg" id="launch-bg" aria-hidden="true">
+    <div class="launch__bg-grid"></div>
+    <div class="launch__aurora"></div>
+    <span class="launch__giant">CÁCERES</span>
+  </div>
+
+  <div class="launch__container" id="launch-container">
+    <!-- Título e Texto: Primeiro a aparecer -->
+    <div class="launch__header" id="launch-header">
+      <p class="eyebrow reveal">Novidade na cidade</p>
+      <h2 class="section-title reveal" id="launch-title">
+        Chegamos<br />em Cáceres.
+      </h2>
+      <p class="launch__text reveal">
+        O ABS está começando a rodar agora — e quem entra no começo anda na
+        frente. Peça sua primeira corrida ou venha rodar com a gente desde o dia
+        um.
+      </p>
+    </div>
+
+    <!-- Cards: Segundo a aparecer -->
+    <div class="launch__grid" id="launch-grid">
+      {
+        promises.map((p, i) => (
+          <div
+            class="promise reveal"
+          >
+            <span class="promise__index mono" aria-hidden="true">
+              0{i + 1}
+            </span>
+            <div class="promise__icon" aria-hidden="true">
+              <svg
+                width="20"
+                height="20"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              >
+                <path d={p.icon} />
+              </svg>
+            </div>
+            <h3 class="promise__title">{p.title}</h3>
+            <p class="promise__detail">{p.detail}</p>
+          </div>
+        ))
+      }
+    </div>
+
+    <!-- Botão: Último a aparecer -->
+    <a
+      href="https://wa.me/5565996164735"
+      class="btn btn--primary reveal"
+      target="_blank"
+      rel="noopener noreferrer"
+      id="cta-primeiros"
+    >
+      <span>Quero ser um dos primeiros</span>
+      <svg
+        width="16"
+        height="16"
+        viewBox="0 0 16 16"
+        fill="none"
+        aria-hidden="true"
+      >
+        <path
+          d="M3 8h10M9 4l4 4-4 4"
+          stroke="currentColor"
+          stroke-width="1.5"
+          stroke-linecap="round"
+          stroke-linejoin="round"></path>
+      </svg>
+    </a>
+  </div>
+</section>
+
+<script>
+  const prefersReduced = window.matchMedia(
+    "(prefers-reduced-motion: reduce)",
+  ).matches;
+
+  const section = document.getElementById("chegamos");
+  const photoStage = document.getElementById("launch-photo-stage");
+  const bg = document.getElementById("launch-bg");
+  const container = document.getElementById("launch-container");
+  
+  // Elementos para controle de sequência
+  const header = document.getElementById("launch-header");
+  const grid = document.getElementById("launch-grid");
+  const cta = document.getElementById("cta-primeiros");
+
+  if (section && photoStage && bg && container && !prefersReduced) {
+    section.classList.add("launch--staged");
+    let ticking = false;
+
+    const update = () => {
+      const rect = section.getBoundingClientRect();
+      const vh = window.innerHeight;
+      
+      // Se a seção estiver fora da tela, não processa
+      if (rect.bottom < 0 || rect.top > vh) return;
+
+      // Cálculo de progresso baseado no scroll
+      // Aumentamos o range para a animação ser mais suave
+      const startPoint = vh * 1.1; 
+      const endPoint = vh * -0.4;
+      const progress = Math.min(1, Math.max(0, (startPoint - rect.top) / (startPoint - endPoint)));
+
+      // FASE 1: Imagem expandindo (0% -> 40% do progresso)
+      // Começa bem pequena (scale 0.1) e vai até 1.0
+      const growProgress = Math.min(1, progress / 0.4);
+      photoStage.style.setProperty("--grow", String(growProgress));
+
+      // FASE 2: Escurecimento parcial e Revelação do Conteúdo (40% -> 100%)
+      const contentProgress = Math.max(0, (progress - 0.4) / 0.6);
+      
+      // Opacidade do fundo nunca fica total para manter Cáceres visível
+      photoStage.style.setProperty("--dark", String(contentProgress * 0.65)); 
+      
+      bg.style.opacity = String(contentProgress);
+      container.style.opacity = String(contentProgress);
+      
+      // Conteúdo começa mais para baixo e sobe levemente
+      const translateY = (1 - contentProgress) * 80; // Aumentado para 80px para dar mais espaço
+      container.style.transform = `translateY(${translateY}px)`;
+
+      // SEQUÊNCIA DE REVELAÇÃO (DENTRO DA FASE 2)
+      // 1. Header (Título)
+      const headerReveal = Math.min(1, contentProgress / 0.4);
+      if(header) {
+        header.style.opacity = String(headerReveal);
+        header.style.transform = `translateY(${(1 - headerReveal) * 20}px)`;
+      }
+
+      // 2. Grid (Cards) - Começa quando o header está 50% revelado
+      const gridReveal = Math.max(0, (contentProgress - 0.2) / 0.5);
+      if(grid) {
+        grid.style.opacity = String(gridReveal);
+        grid.style.transform = `translateY(${(1 - gridReveal) * 30}px)`;
+      }
+
+      // 3. CTA (Botão) - Começa quando o grid está 60% revelado
+      const ctaReveal = Math.max(0, (contentProgress - 0.5) / 0.5);
+      if(cta) {
+        cta.style.opacity = String(ctaReveal);
+        cta.style.transform = `translateY(${(1 - ctaReveal) * 15}px)`;
+      }
+    };
+
+    window.addEventListener("scroll", () => {
+      if (!ticking) {
+        requestAnimationFrame(() => {
+          update();
+          ticking = false;
+        });
+        ticking = true;
+      }
+    }, { passive: true });
+
+    update();
+  }
+
+  // CTA magnético (mantido do original)
+  if (cta && !prefersReduced && window.matchMedia("(hover: hover)").matches) {
+    cta.addEventListener("mousemove", (e) => {
+      const r = cta.getBoundingClientRect();
+      const x = e.clientX - r.left - r.width / 2;
+      const y = e.clientY - r.top - r.height / 2;
+      cta.style.transition = "transform 0.25s cubic-bezier(0.16, 1, 0.3, 1)";
+      cta.style.transform = `translate(${x * 0.22}px, ${y * 0.3}px)`;
+    });
+
+    cta.addEventListener("mouseleave", () => {
+      cta.style.transition = "transform 0.7s cubic-bezier(0.34, 1.56, 0.64, 1)";
+      cta.style.transform = "";
+    });
+  }
+</script>
+
+<style>
+  .launch {
+    padding: calc(var(--section-pad-y) * 1.5) var(--section-pad-x); /* Mais padding para empurrar conteúdo */
+    position: relative;
+    overflow: hidden;
+    min-height: 120vh; /* Garante espaço para o scroll da animação */
+    display: flex;
+    align-items: flex-end; /* Conteúdo começa mais embaixo */
+    padding-bottom: 10vh;
+  }
+
+  .launch__photo-stage {
+    --grow: 0;
+    --dark: 0;
+    position: absolute;
+    inset: 0;
+    z-index: 0;
+    pointer-events: none;
+    overflow: hidden;
+  }
+
+  .launch__photo-frame {
+    position: absolute;
+    inset: 0;
+    overflow: hidden;
+    /* Começa em 0.05 (quase um ponto) e vai até 1.0 */
+    transform: scale(calc(0.05 + var(--grow) * 0.95));
+    border-radius: calc((1 - var(--grow)) * 40px);
+    box-shadow: 0 30px 90px -20px rgba(0, 0, 0, 0.7);
+    transition: transform 0.1s linear, border-radius 0.1s linear;
+  }
+
+  .launch__photo-img {
+    position: absolute;
+    inset: -5%;
+    background: url("/caceres.jpg") center 58% / cover no-repeat;
+    filter: saturate(0.9) contrast(1.05);
+  }
+
+  .launch__photo-dark {
+    position: absolute;
+    inset: 0;
+    /* Overlay escuro que nunca bloqueia totalmente a foto */
+    background: rgba(11, 11, 12, var(--dark, 0.65));
+    transition: background 0.1s linear;
+  }
+
+  .launch--staged .launch__bg,
+  .launch--staged .launch__container {
+    opacity: 0;
+  }
+
+  .launch__container {
+    max-width: var(--container-max);
+    margin: 0 auto;
+    position: relative;
+    z-index: 2;
+    width: 100%;
+  }
+
+  .launch__header, .launch__grid, #cta-primeiros {
+    will-change: transform, opacity;
+  }
+
+  .launch__bg {
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    z-index: 1;
+  }
+
+  .launch__bg-grid {
+    position: absolute;
+    inset: 0;
+    background-image:
+      linear-gradient(to right, rgba(244, 194, 13, 0.03) 1px, transparent 1px),
+      linear-gradient(to bottom, rgba(244, 194, 13, 0.03) 1px, transparent 1px);
+    background-size: 56px 56px;
+    mask-image: linear-gradient(to bottom, transparent, black 30%, black 70%, transparent);
+  }
+
+  .launch__giant {
+    position: absolute;
+    bottom: -0.05em;
+    left: 50%;
+    transform: translateX(-50%);
+    font-family: var(--font-display);
+    font-weight: 900;
+    font-size: clamp(6rem, 18vw, 18rem);
+    line-height: 0.75;
+    letter-spacing: -0.05em;
+    white-space: nowrap;
+    color: transparent;
+    -webkit-text-stroke: 1px rgba(244, 194, 13, 0.08);
+    opacity: 0.2;
+    user-select: none;
+  }
+
+  .launch__header {
+    margin-bottom: 4rem;
+  }
+
+  .launch__text {
+    font-size: 1.125rem;
+    color: var(--muted);
+    max-width: 600px;
+    line-height: 1.7;
+  }
+
+  .launch__grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1.5rem;
+    margin-bottom: 4rem;
+  }
+
+  .promise {
+    background: rgba(242, 240, 234, 0.03);
+    border: 1px solid rgba(242, 240, 234, 0.08);
+    border-radius: var(--radius-md);
+    padding: 2rem 1.75rem;
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    position: relative;
+    transition: all 0.3s ease;
+  }
+
+  .promise:hover {
+    background: rgba(242, 240, 234, 0.06);
+    border-color: var(--accent);
+    transform: translateY(-5px);
+  }
+
+  .promise__icon {
+    width: 48px;
+    height: 48px;
+    border-radius: 12px;
+    background: rgba(244, 194, 13, 0.1);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--accent);
+    margin-bottom: 1.5rem;
+  }
+
+  .promise__title {
+    font-size: 1.125rem;
+    font-weight: 600;
+    margin-bottom: 0.75rem;
+  }
+
+  .promise__detail {
+    font-size: 0.9375rem;
+    color: var(--muted);
+    line-height: 1.6;
+  }
+
+  @media (max-width: 992px) {
+    .launch__grid {
+      grid-template-columns: 1fr;
+      gap: 1rem;
+    }
+    .launch {
+      min-height: auto;
+      padding-top: 20vh;
+    }
+  }
+</style>

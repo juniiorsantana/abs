@@ -8,6 +8,33 @@ const {
   title = 'Vai de ABS — Moto táxi via app em Cáceres',
   description = 'A forma mais moderna de se mover em Cáceres. Veja o preço antes, acompanhe a moto e pague sem dinheiro.',
 } = Astro.props;
+
+// TODO: trocar pelo domínio real quando o site for publicado
+const SITE_URL = 'https://vaideabs.com.br';
+const canonical = new URL(Astro.url.pathname, SITE_URL).href;
+
+const localBusinessSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'LocalBusiness',
+  name: 'Vai de ABS',
+  description:
+    'Moto táxi via app em Cáceres, MT. Preço visível antes de confirmar, rastreio em tempo real e pagamento digital.',
+  url: SITE_URL,
+  telephone: '+55-65-99616-4735',
+  image: `${SITE_URL}/og-image.png`,
+  priceRange: 'R$',
+  address: {
+    '@type': 'PostalAddress',
+    addressLocality: 'Cáceres',
+    addressRegion: 'MT',
+    addressCountry: 'BR',
+  },
+  areaServed: {
+    '@type': 'City',
+    name: 'Cáceres',
+  },
+  sameAs: ['https://www.instagram.com/pedeabscaceres/'],
+};
 ---
 
 <!doctype html>
@@ -20,11 +47,31 @@ const {
     <meta name="description" content={description} />
     <meta name="generator" content={Astro.generator} />
 
+    <link rel="canonical" href={canonical} />
+    <link rel="manifest" href="/manifest.json" />
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+
     <!-- Open Graph -->
     <meta property="og:title" content={title} />
     <meta property="og:description" content={description} />
     <meta property="og:type" content="website" />
+    <meta property="og:url" content={canonical} />
+    <meta property="og:image" content={`${SITE_URL}/og-image.png`} />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:locale" content="pt_BR" />
+    <meta property="og:site_name" content="Vai de ABS" />
+
+    <!-- Twitter -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content={title} />
+    <meta name="twitter:description" content={description} />
+    <meta name="twitter:image" content={`${SITE_URL}/og-image.png`} />
+
     <meta name="theme-color" content="#0B0B0C" />
+
+    <!-- Dados estruturados: negócio local -->
+    <script type="application/ld+json" set:html={JSON.stringify(localBusinessSchema)} />
 
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -42,14 +89,14 @@ const {
     <!-- Navbar -->
     <nav class="navbar" id="navbar" role="navigation" aria-label="Navegação principal">
       <div class="navbar__inner">
-        <a href="#hero" class="navbar__brand" aria-label="Vai de ABS - Início">
+        <a href="/#hero" class="navbar__brand" aria-label="Vai de ABS - Início">
           Vai de ABS<span class="navbar__dot">.</span>
         </a>
         <div class="navbar__links navbar__links--desktop">
-          <a href="#como-funciona" class="navbar__link">Como funciona</a>
-          <a href="#motoboy" class="navbar__link">Seja motoboy</a>
-          <a href="#precos" class="navbar__link">Preços</a>
-          <a href="#contato" class="navbar__cta">Pedir corrida</a>
+          <a href="/#como-funciona" class="navbar__link">Como funciona</a>
+          <a href="/#motoboy" class="navbar__link">Seja motoboy</a>
+          <a href="/#precos" class="navbar__link">Preços</a>
+          <button type="button" class="navbar__cta" data-open-app-modal>Pedir corrida</button>
         </div>
 
         <button
@@ -66,14 +113,143 @@ const {
       </div>
 
       <div class="navbar__mobile" id="nav-mobile" aria-hidden="true">
-        <a href="#como-funciona" class="navbar__mobile-link">Como funciona</a>
-        <a href="#motoboy" class="navbar__mobile-link">Seja motoboy</a>
-        <a href="#precos" class="navbar__mobile-link">Preços</a>
-        <a href="#contato" class="navbar__mobile-cta btn btn--primary">Pedir corrida</a>
+        <a href="/#como-funciona" class="navbar__mobile-link">Como funciona</a>
+        <a href="/#motoboy" class="navbar__mobile-link">Seja motoboy</a>
+        <a href="/#precos" class="navbar__mobile-link">Preços</a>
+        <button type="button" class="navbar__mobile-cta btn btn--primary" data-open-app-modal>Pedir corrida</button>
       </div>
     </nav>
 
     <slot />
+
+    <!-- Modal de download do app -->
+    <div class="app-modal" id="app-modal" aria-hidden="true">
+      <div class="app-modal__overlay" data-close-app-modal></div>
+      <div
+        class="app-modal__panel"
+        role="dialog"
+        aria-modal="true"
+        aria-labelledby="app-modal-title"
+      >
+        <button type="button" class="app-modal__close" data-close-app-modal aria-label="Fechar">
+          <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true">
+            <path d="M4 4l8 8M12 4l-8 8" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+          </svg>
+        </button>
+
+        <p class="eyebrow">Baixe o app</p>
+        <h2 class="app-modal__title" id="app-modal-title">Peça sua corrida pelo app.</h2>
+        <p class="app-modal__sub">Disponível pra iOS e Android. É rápido, é grátis.</p>
+
+        <div class="app-modal__stores">
+          <a
+            href="https://apps.apple.com/br/app/abs-pro/id6754334766"
+            class="app-modal__store app-modal__store--light"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            <svg class="app-modal__store-icon" viewBox="0 0 384 512" fill="currentColor" aria-hidden="true">
+              <path d="M318.7 268.7c-.2-36.7 16.4-64.4 50-84.8-18.8-26.9-47.2-41.7-84.7-44.6-35.5-2.8-74.3 20.7-88.5 20.7-15 0-49.4-19.7-76.4-19.7C63.3 141.2 4 184.8 4 273.5q0 39.3 14.4 81.2c12.8 36.7 59 126.7 107.2 125.2 25.2-.6 43-17.9 75.8-17.9 31.8 0 48.3 17.9 76.4 17.9 48.6-.7 90.4-82.5 102.6-119.3-65.2-30.7-61.7-90-61.7-91.9zm-56.6-164.2c27.3-32.4 24.8-61.9 24-72.5-24.1 1.4-52 16.4-67.9 34.9-17.5 19.8-27.8 44.3-25.6 71.9 26.1 2 49.9-11.4 69.5-34.3z"/>
+            </svg>
+            <span class="app-modal__store-text"><em>Baixar na</em>App Store</span>
+          </a>
+          <a
+            href="https://play.google.com/store/apps/details?id=br.com.devbase.abspro"
+            class="app-modal__store app-modal__store--dark"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            <svg class="app-modal__store-icon" viewBox="0 0 512 512" fill="currentColor" aria-hidden="true">
+              <path d="M325.3 234.3L104.6 13l280.8 161.2-60.1 60.1zM47 0C34 6.8 25.3 19.2 25.3 35.3v441.3c0 16.1 8.7 28.5 21.7 35.3l256.6-256L47 0zm425.2 225.6l-58.9-34.1-65.7 64.5 65.7 64.5 60.1-34.1c18-14.3 18-46.5-1.2-60.8zM104.6 499l280.8-161.2-60.1-60.1L104.6 499z"/>
+            </svg>
+            <span class="app-modal__store-text"><em>Disponível no</em>Google Play</span>
+          </a>
+        </div>
+      </div>
+    </div>
+
+    <!-- Floating WhatsApp button -->
+    <a
+      href="https://wa.me/5565996164735"
+      class="whatsapp-float"
+      target="_blank"
+      rel="noopener noreferrer"
+      aria-label="Falar no WhatsApp"
+    >
+      <svg width="28" height="28" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+        <path d="M12.04 2C6.58 2 2.13 6.45 2.13 11.91c0 1.75.46 3.45 1.32 4.95L2.05 22l5.25-1.38a9.9 9.9 0 0 0 4.74 1.21h.01c5.46 0 9.91-4.45 9.91-9.91C21.96 6.45 17.5 2 12.04 2zm5.83 14.17c-.24.68-1.42 1.33-1.94 1.4-.5.07-1.05.1-1.7-.11-.39-.12-.9-.28-1.55-.55-2.73-1.18-4.51-3.93-4.65-4.11-.14-.18-1.11-1.47-1.11-2.81 0-1.33.7-1.98.95-2.25.24-.27.53-.34.71-.34.18 0 .35 0 .5.01.16.01.38-.06.59.45.24.58.81 2.01.88 2.16.07.15.12.32.02.52-.09.19-.14.31-.28.48-.14.17-.29.37-.42.5-.14.14-.28.28-.12.56.16.28.71 1.17 1.53 1.9 1.05.94 1.94 1.23 2.22 1.37.28.14.44.12.6-.07.16-.19.68-.79.86-1.06.18-.27.36-.22.6-.13.24.09 1.53.72 1.79.85.26.13.44.19.5.3.06.11.06.63-.18 1.31z"/>
+      </svg>
+    </a>
+
+    <script>
+      import Lenis from 'lenis';
+
+      const prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+      if (!prefersReduced) {
+        const lenis = new Lenis({
+          duration: 1.8,
+          easing: (t: number) => 1 - Math.pow(1 - t, 4),
+          smoothWheel: true,
+          wheelMultiplier: 0.75,
+          touchMultiplier: 1,
+        });
+
+        function raf(time: number) {
+          lenis.raf(time);
+          requestAnimationFrame(raf);
+        }
+        requestAnimationFrame(raf);
+
+        document.querySelectorAll('a[href*="#"]').forEach((link) => {
+          link.addEventListener('click', (e) => {
+            const href = link.getAttribute('href') || '';
+            const [path, hash] = href.split('#');
+            if (!hash) return;
+            if (path && path !== window.location.pathname) return;
+
+            const target = document.getElementById(hash);
+            if (!target) return;
+
+            e.preventDefault();
+            lenis.scrollTo(target, { offset: -72 });
+          });
+        });
+      }
+
+      // ─── Modal de download do app ───────────────────────────────────────────
+      const appModal = document.getElementById('app-modal');
+      const openTriggers = document.querySelectorAll('[data-open-app-modal]');
+      const closeTriggers = appModal?.querySelectorAll('[data-close-app-modal]');
+
+      function openAppModal() {
+        if (!appModal) return;
+        appModal.classList.add('open');
+        appModal.setAttribute('aria-hidden', 'false');
+        document.body.style.overflow = 'hidden';
+      }
+
+      function closeAppModal() {
+        if (!appModal) return;
+        appModal.classList.remove('open');
+        appModal.setAttribute('aria-hidden', 'true');
+        document.body.style.overflow = '';
+      }
+
+      openTriggers.forEach((trigger) => {
+        trigger.addEventListener('click', openAppModal);
+      });
+
+      closeTriggers?.forEach((trigger) => {
+        trigger.addEventListener('click', closeAppModal);
+      });
+
+      document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape' && appModal?.classList.contains('open')) {
+          closeAppModal();
+        }
+      });
+    </script>
   </body>
 </html>
 
@@ -117,8 +293,16 @@ const {
     padding: 0;
   }
 
-  html {
-    scroll-behavior: smooth;
+  html.lenis {
+    height: auto;
+  }
+
+  html.lenis-smooth {
+    scroll-behavior: auto;
+  }
+
+  .lenis.lenis-smooth iframe {
+    pointer-events: none;
   }
 
   body {
@@ -501,6 +685,73 @@ const {
     z-index: 1;
   }
 
+  /* Floating WhatsApp button */
+  .whatsapp-float {
+    position: fixed;
+    right: 1.25rem;
+    bottom: 1.25rem;
+    width: 58px;
+    height: 58px;
+    border-radius: 50%;
+    background: linear-gradient(145deg, #2fe374, #20b358);
+    color: #fff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 900;
+    box-shadow: 0 4px 18px rgba(37, 211, 102, 0.4), inset 0 1px 1px rgba(255, 255, 255, 0.25);
+    transition: transform 0.25s var(--ease-spring), box-shadow 0.3s ease;
+  }
+
+  .whatsapp-float::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    border-radius: 50%;
+    background: #25D366;
+    opacity: 0.55;
+    animation: whatsapp-ping 2.4s cubic-bezier(0.16, 1, 0.3, 1) infinite;
+    z-index: -1;
+  }
+
+  .whatsapp-float svg {
+    position: relative;
+    transition: transform 0.3s var(--ease-spring);
+  }
+
+  .whatsapp-float:hover {
+    transform: translateY(-3px) scale(1.08);
+    box-shadow: 0 8px 28px rgba(37, 211, 102, 0.55), inset 0 1px 1px rgba(255, 255, 255, 0.3);
+  }
+
+  .whatsapp-float:hover svg {
+    transform: rotate(-8deg) scale(1.08);
+  }
+
+  .whatsapp-float:active {
+    transform: translateY(-1px) scale(1.02);
+  }
+
+  @keyframes whatsapp-ping {
+    0% {
+      transform: scale(1);
+      opacity: 0.45;
+    }
+    75%, 100% {
+      transform: scale(1.6);
+      opacity: 0;
+    }
+  }
+
+  @media (max-width: 480px) {
+    .whatsapp-float {
+      right: 1rem;
+      bottom: 1rem;
+      width: 52px;
+      height: 52px;
+    }
+  }
+
   @media (prefers-reduced-motion: reduce) {
     *, *::before, *::after {
       animation-duration: 0.01ms !important;
@@ -514,6 +765,172 @@ const {
     .reveal-left {
       opacity: 1;
       transform: none;
+    }
+  }
+
+  /* ── Modal de download do app ──────────────────────────────────────────── */
+  .app-modal {
+    position: fixed;
+    inset: 0;
+    z-index: 1000;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 1.5rem;
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.3s var(--ease-out-expo), visibility 0.3s;
+  }
+
+  .app-modal.open {
+    opacity: 1;
+    visibility: visible;
+  }
+
+  .app-modal__overlay {
+    position: absolute;
+    inset: 0;
+    background: rgba(11, 11, 12, 0.8);
+    backdrop-filter: blur(6px);
+    -webkit-backdrop-filter: blur(6px);
+  }
+
+  .app-modal__panel {
+    position: relative;
+    z-index: 1;
+    width: 100%;
+    max-width: 420px;
+    background: var(--surface);
+    border: 1px solid var(--border-solid);
+    border-radius: var(--radius-md);
+    padding: 2.5rem 2rem 2rem;
+    text-align: center;
+    box-shadow: 0 24px 64px rgba(0, 0, 0, 0.5);
+    transform: translateY(16px) scale(0.98);
+    transition: transform 0.3s var(--ease-out-expo);
+  }
+
+  .app-modal.open .app-modal__panel {
+    transform: translateY(0) scale(1);
+  }
+
+  .app-modal__panel::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 2px;
+    background: var(--accent);
+    border-radius: var(--radius-md) var(--radius-md) 0 0;
+  }
+
+  .app-modal__panel .eyebrow {
+    margin-bottom: 0.75rem;
+  }
+
+  .app-modal__close {
+    position: absolute;
+    top: 1rem;
+    right: 1rem;
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    border: 1px solid var(--border);
+    background: transparent;
+    color: var(--muted);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: color 0.2s ease, border-color 0.2s ease;
+  }
+
+  .app-modal__close:hover {
+    color: var(--text);
+    border-color: var(--border-solid);
+  }
+
+  .app-modal__title {
+    font-family: var(--font-display);
+    font-weight: 700;
+    font-size: 1.5rem;
+    letter-spacing: -0.01em;
+    color: var(--text);
+    margin-bottom: 0.625rem;
+  }
+
+  .app-modal__sub {
+    font-size: 0.9375rem;
+    color: var(--muted);
+    line-height: 1.6;
+    margin-bottom: 1.75rem;
+  }
+
+  .app-modal__stores {
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+  }
+
+  .app-modal__store {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    padding: 0.75rem 1rem;
+    border-radius: var(--radius-sm);
+    transition: transform 0.2s var(--ease-spring), box-shadow 0.25s ease;
+  }
+
+  .app-modal__store:hover {
+    transform: translateY(-2px);
+  }
+
+  .app-modal__store--light {
+    background: var(--text);
+    color: var(--bg);
+  }
+
+  .app-modal__store--light:hover {
+    box-shadow: 0 8px 24px rgba(242, 240, 234, 0.15);
+  }
+
+  .app-modal__store--dark {
+    background: var(--bg);
+    color: var(--text);
+    border: 1px solid var(--border);
+  }
+
+  .app-modal__store--dark:hover {
+    box-shadow: 0 8px 24px rgba(244, 194, 13, 0.12);
+    border-color: var(--border-solid);
+  }
+
+  .app-modal__store-icon {
+    width: 22px;
+    height: 22px;
+    flex-shrink: 0;
+  }
+
+  .app-modal__store-text {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    font-size: 0.9375rem;
+    font-weight: 600;
+    line-height: 1.3;
+  }
+
+  .app-modal__store-text em {
+    font-style: normal;
+    font-size: 0.6875rem;
+    font-weight: 400;
+    opacity: 0.75;
+  }
+
+  @media (max-width: 480px) {
+    .app-modal__panel {
+      padding: 2.25rem 1.5rem 1.75rem;
     }
   }
 </style>
