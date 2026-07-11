@@ -103,6 +103,9 @@ const promises = [
     "(prefers-reduced-motion: reduce)",
   ).matches;
 
+  // No mobile a seção usa layout estático (ver CSS) — sem animação de scroll.
+  const isMobileLayout = window.matchMedia("(max-width: 992px)").matches;
+
   const section = document.getElementById("chegamos");
   const photoStage = document.getElementById("launch-photo-stage");
   const bg = document.getElementById("launch-bg");
@@ -121,7 +124,8 @@ const promises = [
     title &&
     grid &&
     cta &&
-    !prefersReduced
+    !prefersReduced &&
+    !isMobileLayout
   ) {
     let ticking = false;
 
@@ -592,13 +596,65 @@ const promises = [
     opacity: 0.25;
   }
 
+  /* ── Mobile: layout estático, sem scroll-jacking ─────────────────────────
+     O conteúdo (título + 3 cards + botão) é mais alto que a tela no mobile,
+     então a versão sticky/100vh cortava os cards e escondia o botão. */
   @media (max-width: 992px) {
+    .launch {
+      height: auto;
+    }
+
+    .launch__sticky {
+      position: relative;
+      height: auto;
+      overflow: visible;
+      padding: 5rem var(--section-pad-x);
+    }
+
+    .launch__bg,
+    #launch-title,
+    #launch-cards-grid,
+    #cta-primeiros {
+      opacity: 1;
+      transform: none;
+      will-change: auto;
+    }
+
+    .launch__photo-frame {
+      transform: scale(1);
+      border-radius: 0;
+      box-shadow: none;
+    }
+
+    /* Escurecimento fixo pra garantir contraste dos cards sobre a foto */
+    .launch__photo-dark {
+      background: rgba(11, 11, 12, 0.85);
+    }
+
     .launch__grid {
       grid-template-columns: 1fr;
-      gap: 1rem;
+      gap: 1.25rem;
+      margin-bottom: 3rem;
     }
+
     .launch__header {
-      margin-bottom: 2.5rem;
+      margin-bottom: 2.75rem;
+    }
+
+    .promise {
+      padding: 1.75rem 1.5rem;
+      backdrop-filter: none;
+      -webkit-backdrop-filter: none;
+      background: rgba(20, 20, 22, 0.88);
+    }
+
+    .promise__icon {
+      margin-bottom: 1.125rem;
+    }
+
+    .launch__giant {
+      font-size: clamp(4rem, 16vw, 8rem);
+      opacity: 0.15;
     }
   }
 
