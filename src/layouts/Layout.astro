@@ -9,8 +9,8 @@ const {
   description = 'A forma mais moderna de se mover em Cáceres. Veja o preço antes, acompanhe a moto e pague sem dinheiro.',
 } = Astro.props;
 
-// TODO: trocar pelo domínio real quando o site for publicado
-const SITE_URL = 'https://vaideabs.com.br';
+// TODO: trocar pelo domínio definitivo quando vaideabs.com.br for registrado
+const SITE_URL = 'https://vaideabs.vercel.app';
 const canonical = new URL(Astro.url.pathname, SITE_URL).href;
 
 const localBusinessSchema = {
